@@ -349,10 +349,10 @@
     <script>
         // Data
         let products = [
-            { id: 1, name: 'Premium Matcha Powder', category: 'Matcha Powder', price: 590, image: '/assets/images/powder.jpg' },
-            { id: 2, name: 'Matcha Latte Set', category: 'Drinks', price: 120, image: '/assets/images/spe.jpg' },
-            { id: 3, name: 'Bamboo Whisk (Chasen)', category: 'Accessories', price: 450, image: '/assets/images/promo.jpg' },
-            { id: 4, name: 'Matcha 4-in-1', category: 'Matcha Powder', price: 250, image: '/assets/images/4in1.jpg' },
+            { id: 1, name: 'Premium Matcha Powder', category: 'Matcha Powder', price: 590, image: '../assets/images/powder.jpg' },
+            { id: 2, name: 'Matcha Latte Set', category: 'Drinks', price: 120, image: '../assets/images/spe.jpg' },
+            { id: 3, name: 'Bamboo Whisk (Chasen)', category: 'Accessories', price: 450, image: '../assets/images/promo.jpg' },
+            { id: 4, name: 'Matcha 4-in-1', category: 'Matcha Powder', price: 250, image: '../assets/images/4in1.jpg' },
         ];
 
         let deleteId = null;
@@ -469,7 +469,7 @@
                 category: document.getElementById('product-category').value,
                 price: document.getElementById('product-price').value,
                 status: document.getElementById('product-status').value,
-                image: document.getElementById('product-image').value || '/assets/images/logo.png'
+                image: document.getElementById('product-image').value || '../assets/images/logo.png'
             };
 
             if (id) {
