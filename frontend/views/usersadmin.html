@@ -81,26 +81,26 @@
         <nav class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo & Brand -->
-                <a href="/" class="flex items-center gap-3 group">
+                <a href="../views/index.html" class="flex items-center gap-3 group">
                     <div class="relative">
                         <div
                             class="absolute inset-0 bg-matcha/20 rounded-2xl blur-md scale-110 group-hover:scale-125 transition-transform">
                         </div>
                         <div
                             class="relative bg-white p-2 rounded-2xl shadow-sm border border-matcha/10 group-hover:shadow-md transition-all">
-                            <img src="/assets/images/logo.png" alt="I KHEAW Logo" class="w-9 h-9 object-contain">
+                            <img src="../assets/images/logo.png" alt="I KHEAW Logo" class="w-9 h-9 object-contain">
                         </div>
                     </div>
                     <div class="hidden sm:block">
                         <h1 class="font-playfair text-lg font-bold text-matcha-dark leading-tight">I KHEAW</h1>
-                        <p class="text-[9px] text-matcha/60 tracking-wider">Admin Portal</p>
+                        <p class="text-[9px] text-matcha/60 tracking-wider">Matcha & Tea</p>
                     </div>
                 </a>
 
                 <!-- Desktop Menu -->
                 <ul class="hidden md:flex items-center gap-1">
                     <li>
-                        <a href="productsadmin.htmlproducts.html"
+                        <a href="../views/productsadmin.html"
                             class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
                             <i class="fas fa-box text-xs mr-1.5 opacity-50"></i>
                             Products
@@ -114,7 +114,7 @@
                         </a>
                     </li>
                     <li class="ml-2">
-                        <a href="/"
+                        <a href="../views/index.html"
                             class="inline-flex items-center gap-2 border border-matcha/20 text-matcha px-5 py-2 rounded-xl text-sm font-medium hover:bg-matcha hover:text-white transition-all">
                             <i class="fas fa-sign-out-alt text-xs"></i>
                             Exit Admin
@@ -194,15 +194,6 @@
                     <input type="text" id="search-input" placeholder="ค้นหาชื่อผู้ใช้, อีเมล..."
                         class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-matcha/30 focus:outline-none transition-all">
                 </div>
-                <div class="flex gap-3">
-                    <select id="role-filter"
-                        class="px-4 py-3 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-matcha/30 focus:outline-none text-gray-600 cursor-pointer">
-                        <option value="all">All Roles</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Editor">Editor</option>
-                        <option value="User">User</option>
-                    </select>
-                </div>
             </div>
 
             <!-- Users Table -->
@@ -212,9 +203,7 @@
                         <thead>
                             <tr class="bg-gray-50/50 border-b border-gray-100">
                                 <th class="p-6 font-medium text-gray-500 text-sm">User</th>
-                                <th class="p-6 font-medium text-gray-500 text-sm">Role</th>
                                 <th class="p-6 font-medium text-gray-500 text-sm">Email</th>
-                                <th class="p-6 font-medium text-gray-500 text-sm">Status</th>
                                 <th class="p-6 font-medium text-gray-500 text-sm text-right">Actions</th>
                             </tr>
                         </thead>
@@ -279,28 +268,7 @@
                                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
                             </div>
                         </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-sm font-medium text-gray-700">Role</label>
-                                <select id="user-role"
-                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
-                                    <option value="Admin">Admin</option>
-                                    <option value="Editor">Editor</option>
-                                    <option value="User">User</option>
-                                </select>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-sm font-medium text-gray-700">Status</label>
-                                <select id="user-status"
-                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                    <option value="Banned">Banned</option>
-                                </select>
-                            </div>
-                        </div>
-
+                        
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-gray-700">Profile Image URL</label>
                             <div class="flex gap-4">
@@ -351,12 +319,12 @@
     </div>
 
     <script>
-        // Mock Data
+        // Data
         let users = [
-            { id: 1, name: 'admin', email: 'admin@ikheaw.com', role: 'Admin', status: 'Active', image: 'https://ui-avatars.com/api/?name=Admin&background=809671&color=fff' },
-            { id: 2, name: 'editor_jane', email: 'jane@ikheaw.com', role: 'Editor', status: 'Active', image: 'https://ui-avatars.com/api/?name=Jane&background=random' },
-            { id: 3, name: 'user_bob', email: 'bob@gmail.com', role: 'User', status: 'Inactive', image: 'https://ui-avatars.com/api/?name=Bob&background=random' },
-            { id: 4, name: 'test_user', email: 'test@hotmail.com', role: 'User', status: 'Banned', image: 'https://ui-avatars.com/api/?name=Test&background=random' },
+            { id: 1, name: 'Jirawat Pratuangtup', email: 'jirawat.pru@student.mahidol.edu', image: '' },
+            { id: 2, name: 'Nitis Charoendee', email: 'nitis.cha@student.mahidol.edu', image: '' },
+            { id: 3, name: 'Pavida Khramwong', email: 'pavida.khr@student.mahidol.edu', image: '' },
+            { id: 4, name: 'Sirawich Srisukmungmee', email: 'sirawich.srs@student.mahidol.edu', image: '' },
         ];
 
         let deleteId = null;
