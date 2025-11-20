@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -32,24 +34,46 @@
     .animate-float {
       animation: float 4s ease-in-out infinite;
     }
+
     .animate-float-delay {
       animation: float 4s ease-in-out infinite;
       animation-delay: 2s;
     }
+
     .animate-pulse-slow {
       animation: pulse 3s ease-in-out infinite;
     }
+
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(5deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-15px) rotate(5deg);
+      }
     }
+
     @keyframes pulse {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.05); }
+
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
     }
+
     .bg-pattern {
       background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23809671' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
+
     .input-focus:focus-within {
       transform: translateY(-2px);
     }
@@ -59,7 +83,8 @@
 <body class="bg-cream min-h-screen font-prompt">
   <div class="min-h-screen flex">
     <!-- Left Side - Branding -->
-    <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-matcha via-matcha to-matcha-dark relative overflow-hidden">
+    <div
+      class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-matcha via-matcha to-matcha-dark relative overflow-hidden">
       <!-- Pattern overlay -->
       <div class="absolute inset-0 bg-pattern opacity-100"></div>
 
@@ -79,7 +104,8 @@
 
       <!-- Glowing circles -->
       <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1.5s;"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl animate-pulse-slow"
+        style="animation-delay: 1.5s;"></div>
 
       <!-- Content -->
       <div class="relative z-10 flex flex-col justify-center items-center w-full px-12 text-center">
@@ -120,7 +146,7 @@
           <span class="text-sm">กลับหน้าหลัก</span>
         </a>
 
-        <!-- Mobile Logo -->
+        <!-- Layerfix Logo -->
         <div class="lg:hidden text-center mb-8">
           <div class="inline-block relative mb-4">
             <div class="absolute inset-0 bg-matcha/20 rounded-2xl blur-xl scale-125"></div>
@@ -148,14 +174,9 @@
                 <div class="absolute left-4 top-1/2 -translate-y-1/2 text-matcha/40">
                   <i class="fas fa-user"></i>
                 </div>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
+                <input type="text" id="username" name="username"
                   class="w-full pl-12 pr-4 py-4 bg-cream/50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-matcha/30 focus:bg-white transition-all"
-                  placeholder="กรอก username ของคุณ"
-                  required
-                >
+                  placeholder="กรอก username ของคุณ" required>
               </div>
             </div>
 
@@ -168,15 +189,11 @@
                 <div class="absolute left-4 top-1/2 -translate-y-1/2 text-matcha/40">
                   <i class="fas fa-lock"></i>
                 </div>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
+                <input type="password" id="password" name="password"
                   class="w-full pl-12 pr-12 py-4 bg-cream/50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-matcha/30 focus:bg-white transition-all"
-                  placeholder="กรอก password ของคุณ"
-                  required
-                >
-                <button type="button" id="toggle-password" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-matcha transition-colors">
+                  placeholder="กรอก password ของคุณ" required>
+                <button type="button" id="toggle-password"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-matcha transition-colors">
                   <i class="fas fa-eye"></i>
                 </button>
               </div>
@@ -193,11 +210,8 @@
             </div>
 
             <!-- Submit Button -->
-            <button
-              type="submit"
-              id="submit-btn"
-              class="w-full bg-gradient-to-r from-matcha to-matcha-dark text-white py-4 rounded-2xl font-semibold hover:shadow-xl hover:shadow-matcha/25 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3"
-            >
+            <button type="submit" id="submit-btn"
+              class="w-full bg-gradient-to-r from-matcha to-matcha-dark text-white py-4 rounded-2xl font-semibold hover:shadow-xl hover:shadow-matcha/25 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
               <span>เข้าสู่ระบบ</span>
               <i class="fas fa-arrow-right"></i>
             </button>
@@ -207,7 +221,8 @@
         <!-- Register Link -->
         <div class="mt-8 text-center">
           <p class="text-gray-500 mb-4">ยังไม่มีบัญชี?</p>
-          <a href="/about" class="inline-flex items-center gap-2 text-matcha font-medium hover:text-matcha-dark transition-colors group">
+          <a href="/about"
+            class="inline-flex items-center gap-2 text-matcha font-medium hover:text-matcha-dark transition-colors group">
             <span>ติดต่อเจ้าหน้าที่</span>
             <i class="fas fa-user-plus text-sm group-hover:scale-110 transition-transform"></i>
           </a>
@@ -226,7 +241,7 @@
   <script src="/js/auth.js"></script>
   <script>
     // toggle password
-    document.getElementById('toggle-password').addEventListener('click', function() {
+    document.getElementById('toggle-password').addEventListener('click', function () {
       const pw = document.getElementById('password');
       const icon = this.querySelector('i');
       if (pw.type === 'password') {
