@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - I KHEAW - Matcha & Tea</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'prompt': ['Prompt', 'sans-serif'],
+            'playfair': ['Playfair Display', 'serif'],
+          },
+          colors: {
+            'matcha': '#809671',
+            'matcha-dark': '#6a7d5e',
+            'matcha-light': '#a8b89d',
+            'cream': '#f8f6f3',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-cream min-h-screen font-prompt">
+  <!-- Navigation Bar -->
+  <header id="navbar"
+    class="bg-white/90 backdrop-blur-lg border-b border-matcha/10 fixed top-0 w-full z-50 transition-all duration-300">
+    <nav class="container mx-auto px-6 py-3">
+      <div class="flex justify-between items-center">
+        <!-- Logo & Brand -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="relative">
+            <div
+              class="absolute inset-0 bg-matcha/20 rounded-2xl blur-md scale-110 group-hover:scale-125 transition-transform">
+            </div>
+            <div
+              class="relative bg-white p-2 rounded-2xl shadow-sm border border-matcha/10 group-hover:shadow-md transition-all">
+              <img src="/assets/images/logo.png" alt="I KHEAW Logo" class="w-9 h-9 object-contain">
+            </div>
+          </div>
+          <div class="hidden sm:block">
+            <h1 class="font-playfair text-lg font-bold text-matcha-dark leading-tight">I KHEAW</h1>
+            <p class="text-[9px] text-matcha/60 tracking-wider">Matcha & Tea</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex items-center gap-1">
+          <li>
+            <a href="/" class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
+              <i class="fas fa-home text-xs mr-1.5 opacity-50"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/search"
+              class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+              <i class="fas fa-leaf text-xs mr-1.5 opacity-50"></i>
+              Product
+            </a>
+          </li>
+          <li>
+            <a href="/about"
+              class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+              <i class="fas fa-heart text-xs mr-1.5 opacity-50"></i>
+              About us
+            </a>
+          </li>
+          <li class="ml-1">
+            <a href="/search"
+              class="flex items-center justify-center w-9 h-9 text-gray-400 hover:text-matcha hover:bg-matcha/10 rounded-xl transition-all">
+              <i class="fas fa-search text-sm"></i>
+            </a>
+          </li>
+          <li class="ml-2">
+            <a href="/login"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-matcha to-matcha-dark text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all">
+              <i class="fas fa-sparkles text-xs"></i>
+              Login
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn"
+          class="md:hidden flex items-center justify-center w-9 h-9 text-gray-600 hover:bg-matcha/10 rounded-xl transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 pt-4 animate-fade-in">
+        <div class="bg-white rounded-2xl shadow-lg border border-matcha/10 p-3">
+          <ul class="space-y-1">
+            <li>
+              <a href="/"
+                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-home text-matcha text-xs"></i>
+                </div>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="/search"
+                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-leaf text-matcha text-xs"></i>
+                </div>
+                Product
+              </a>
+            </li>
+            <li>
+              <a href="/about"
+                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-heart text-matcha text-xs"></i>
+                </div>
+                About us
+              </a>
+            </li>
+            <li class="pt-2">
+              <a href="/login"
+                class="flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-matcha to-matcha-dark text-white rounded-xl font-medium">
+                <i class="fas fa-sparkles text-sm"></i>
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Spacer for fixed navbar -->
+  <div class="h-[72px]"></div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16 min-h-screen flex flex-col items-center justify-center text-center">
+      <h1 class="text-6xl font-bold text-matcha-dark mb-4 animate-pulse">404</h1>
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-6 animate-fade-in">Page Not Found</h2>
+      <p class="text-gray-600 mb-8 max-w-md animate-fade-in">
+        Oops! The page you're looking for doesn't exist or has been moved.
+      </p>
+      <a href="/"
+        class="inline-flex items-center gap-2 bg-matcha text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-matcha-dark hover:shadow-lg hover:-translate-y-0.5 transition-all animate-fade-in">
+        <i class="fas fa-home text-xs"></i>
+        Back to Home
+      </a>
+    </main>
+
+  
+
+  <!-- Footer -->
+  <footer class="relative bg-cream overflow-hidden">
+    <!-- Wave Top -->
+    <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
+      <svg class="relative block w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path
+          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+          fill="#809671"></path>
+      </svg>
+    </div>
+
+    <!-- Decorative Leaves -->
+    <div class="absolute top-20 left-10 text-matcha/10 text-6xl"><i class="fas fa-leaf"></i></div>
+    <div class="absolute top-32 right-16 text-matcha/10 text-4xl rotate-45"><i class="fas fa-leaf"></i></div>
+    <div class="absolute bottom-20 left-1/4 text-matcha/10 text-5xl -rotate-12"><i class="fas fa-leaf"></i></div>
+
+    <!-- Main Footer Content -->
+    <div class="relative z-10 pt-24 pb-8">
+      <div class="container mx-auto px-6">
+
+        <!-- Top Section -->
+        <div class="text-center mb-12">
+          <!-- Logo with soft glow -->
+          <div class="inline-block mb-6 relative">
+            <div class="absolute inset-0 bg-matcha/20 rounded-full blur-xl scale-150"></div>
+            <div class="relative bg-white p-5 rounded-3xl shadow-lg border border-matcha/10">
+              <img src="/assets/images/logo.png" alt="I KHEAW Logo" class="w-16 h-16 object-contain">
+            </div>
+          </div>
+
+          <h3 class="font-playfair text-2xl md:text-3xl font-bold text-matcha-dark mb-2">I KHEAW</h3>
+          <p class="text-matcha/70 mb-6">Premium Matcha & Japanese Tea</p>
+
+          <!-- Social Icons -->
+          <div class="flex justify-center gap-3">
+            <a href="#"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fab fa-facebook-f text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="#"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fab fa-instagram text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="#"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fab fa-line text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="mailto:matchaikheaw@gmail.com"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fas fa-envelope text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-6 border-t border-matcha/10">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+            <p class="text-gray-400 text-sm">
+              &copy; 2025 I KHEAW. All rights reserved.
+            </p>
+            <p class="text-gray-400 text-sm flex items-center gap-1">
+              Made with
+              <i class="fas fa-heart text-red-400 text-xs animate-pulse"></i>
+              by ITDS241 Team
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-md');
+      } else {
+        navbar.classList.remove('shadow-md');
+      }
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>

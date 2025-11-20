@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I KHEAW - Matcha & Tea</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'prompt': ['Prompt', 'sans-serif'],
+            'playfair': ['Playfair Display', 'serif'],
+          },
+          colors: {
+            'matcha': '#809671',
+            'matcha-dark': '#6a7d5e',
+            'matcha-light': '#a8b89d',
+            'cream': '#f8f6f3',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, rgba(128, 150, 113, 0.9) 0%, rgba(106, 125, 94, 0.8) 100%);
+    }
+
+    .card-overlay {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+    }
+
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-cream min-h-screen font-prompt">
+  <!-- Navigation Bar -->
+  <header id="navbar"
+    class="bg-white/90 backdrop-blur-lg border-b border-matcha/10 fixed top-0 w-full z-50 transition-all duration-300">
+    <nav class="container mx-auto px-6 py-3">
+      <div class="flex justify-between items-center">
+        <!-- Logo & Brand -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="relative">
+            <div
+              class="absolute inset-0 bg-matcha/20 rounded-2xl blur-md scale-110 group-hover:scale-125 transition-transform">
+            </div>
+            <div
+              class="relative bg-white p-2 rounded-2xl shadow-sm border border-matcha/10 group-hover:shadow-md transition-all">
+              <img src="../assets/images/logo.png" alt="I KHEAW Logo" class="w-9 h-9 object-contain">
+            </div>
+          </div>
+          <div class="hidden sm:block">
+            <h1 class="font-playfair text-lg font-bold text-matcha-dark leading-tight">I KHEAW</h1>
+            <p class="text-[9px] text-matcha/60 tracking-wider">Matcha & Tea</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex items-center gap-1">
+          <li>
+            <a href="/" class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
+              <i class="fas fa-home text-xs mr-1.5 opacity-50"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/search"
+              class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+              <i class="fas fa-leaf text-xs mr-1.5 opacity-50"></i>
+              Product
+            </a>
+          </li>
+          <li>
+            <a href="/about"
+              class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+              <i class="fas fa-heart text-xs mr-1.5 opacity-50"></i>
+              About us
+            </a>
+          </li>
+          <li class="ml-1">
+            <a href="/search"
+              class="flex items-center justify-center w-9 h-9 text-gray-400 hover:text-matcha hover:bg-matcha/10 rounded-xl transition-all">
+              <i class="fas fa-search text-sm"></i>
+            </a>
+          </li>
+          <li class="ml-2">
+            <a href="/login"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-matcha to-matcha-dark text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all">
+              <i class="fas fa-sparkles text-xs"></i>
+              Login
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn"
+          class="md:hidden flex items-center justify-center w-9 h-9 text-gray-600 hover:bg-matcha/10 rounded-xl transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 pt-4 animate-fade-in">
+        <div class="bg-white rounded-2xl shadow-lg border border-matcha/10 p-3">
+          <ul class="space-y-1">
+            <li>
+              <a href="/"
+                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-home text-matcha text-xs"></i>
+                </div>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="/search"
+                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-leaf text-matcha text-xs"></i>
+                </div>
+                Product
+              </a>
+            </li>
+            <li>
+              <a href="/about"
+                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-heart text-matcha text-xs"></i>
+                </div>
+                About us
+              </a>
+            </li>
+            <li class="pt-2">
+              <a href="/login"
+                class="flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-matcha to-matcha-dark text-white rounded-xl font-medium">
+                <i class="fas fa-sparkles text-sm"></i>
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Spacer for fixed navbar -->
+  <div class="h-[72px]"></div>
+
+  <!-- Hero Section -->
+  <section class="relative h-[85vh] overflow-hidden">
+    <img src="../assets/images/mainlo.jpg" alt="I KHEAW Hero" class="w-full h-full object-cover">
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-matcha/80 via-matcha/70 to-matcha-dark/90 flex items-center justify-center">
+      <div class="text-center text-white px-4 animate-fade-in">
+
+        <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-4 text-shadow">I KHEAW</h1>
+        <p class="text-xl md:text-2xl font-light mb-3 text-shadow">Premium Matcha & Japanese Tea</p>
+        <p class="text-white/70 text-sm mb-8 max-w-md mx-auto">ค้นหาข้อมูลชาเขียวคุณภาพ
+          เพื่อช่วยให้คุณเลือกสิ่งที่ดีที่สุด</p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/search"
+            class="inline-flex items-center justify-center gap-2 bg-white text-matcha-dark px-8 py-4 rounded-2xl font-semibold hover:bg-cream transition-all hover:shadow-xl hover:-translate-y-1 group">
+            <i class="fas fa-search text-sm"></i>
+            ดูสินค้าทั้งหมด
+            <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+          </a>
+          <a href="/about"
+            class="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-6 py-4 rounded-2xl font-medium hover:bg-white/20 transition-all border border-white/20">
+            <i class="fas fa-info-circle text-sm"></i>
+            About Us
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+      <a href="#about" class="flex flex-col items-center text-white/60 hover:text-white transition-colors">
+        <span class="text-xs mb-2">Scroll</span>
+        <i class="fas fa-chevron-down"></i>
+      </a>
+    </div>
+  </section>
+
+
+  
+
+  <!-- Menu Section -->
+  <section class="py-20 bg-cream">
+    <div class="container mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-12 animate-on-scroll">
+        <div class="inline-flex items-center gap-2 bg-matcha/10 px-4 py-2 rounded-full mb-4">
+          <i class="fas fa-book text-matcha text-xs"></i>
+          <span class="text-matcha text-sm font-medium">แคตตาล็อกสินค้า</span>
+        </div>
+        <h2 class="font-playfair text-3xl md:text-4xl font-bold text-matcha-dark mb-4">Product Catalog</h2>
+        <div class="flex items-center justify-center gap-3">
+          <div class="w-8 h-1 bg-matcha/30 rounded-full"></div>
+          <div class="w-3 h-3 bg-matcha rounded-full"></div>
+          <div class="w-8 h-1 bg-matcha/30 rounded-full"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Menu Item 1 -->
+        <a href="/search?category=promotion" class="group block animate-on-scroll">
+          <div
+            class="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <div class="relative overflow-hidden h-72">
+              <img src="../assets/images/promo.jpg" alt="Promotion Menu"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div
+                class="absolute inset-0 card-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <p class="text-sm">ดูโปรโมชั่นพิเศษ</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">Promotion</h3>
+                <i
+                  class="fas fa-arrow-right text-matcha opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0"></i>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">เมนูโปรโมชั่นสุดคุ้ม</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Menu Item 2 -->
+        <a href="/search?category=special" class="group block animate-on-scroll">
+          <div
+            class="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <div class="relative overflow-hidden h-72">
+              <img src="../assets/images/spe.jpg" alt="Special Menu"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div
+                class="absolute inset-0 card-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <p class="text-sm">เมนูแนะนำจากเรา</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">Special Menu</h3>
+                <i
+                  class="fas fa-arrow-right text-matcha opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0"></i>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">เมนูพิเศษประจำร้าน</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Menu Item 3 -->
+        <a href="/search?category=powder" class="group block animate-on-scroll">
+          <div
+            class="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <div class="relative overflow-hidden h-72">
+              <img src="../assets/images/powder.jpg" alt="Matcha Powder"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div
+                class="absolute inset-0 card-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <p class="text-sm">ผงชาเขียวหลากหลาย</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">Matcha Powder</h3>
+                <i
+                  class="fas fa-arrow-right text-matcha opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0"></i>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">ผงชาเขียวคุณภาพ</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Menu Item 4 -->
+        <a href="/search?category=4in1" class="group block animate-on-scroll">
+          <div
+            class="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <div class="relative overflow-hidden h-72">
+              <img src="../assets/images/4in1.jpg" alt="Matcha 4 in 1"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <div
+                class="absolute inset-0 card-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <p class="text-sm">สะดวก พร้อมชง</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">Matcha 4 in 1</h3>
+                <i
+                  class="fas fa-arrow-right text-matcha opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0"></i>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">ชาเขียวซองพร้อมชง</p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-matcha via-matcha to-matcha-dark relative overflow-hidden">
+    <!-- Decorative bubbles -->
+    <div class="absolute top-4 left-10 w-20 h-20 bg-white/10 rounded-full"></div>
+    <div class="absolute bottom-4 right-16 w-32 h-32 bg-white/10 rounded-full"></div>
+    <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-white/10 rounded-full"></div>
+
+    <div class="container mx-auto px-6 text-center relative z-10 animate-on-scroll">
+      <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+        <i class="fas fa-lightbulb text-yellow-300 text-xs"></i>
+      </div>
+
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">I KHEAW</h2>
+      <p class="text-white/80 mb-8 max-w-xl mx-auto">ธุรกิจนี้เป็นเว็บไซต์ที่จัดทำขึ้นเพื่อแสดงรายละเอียดเกี่ยวกับชาเขียวคุณภาพในหลากหลายรูปแบบ 
+                โดยแบ่งออกเป็น 3 ประเภทหลัก ๆ ได้แก่ ประเภทที่ 1 ชาเขียวลาเต้ ซึ่งมี 3 ชนิดคือ Matcha, 
+                Hojicha และ Genmaicha ที่ให้รสชาติและเอกลักษณ์แตกต่างกันไป ประเภทที่ 2 ชาเขียวแบบผง 
+                ซึ่งมีทั้งเกรดปกติและเกรดพิธีการ ครอบคลุมทั้งแบบผลิตในประเทศและนำเข้า เหมาะสำหรับผู้ที่ต้อง
+                การนำไปชงเองตามความต้องการ และประเภทที่ 3 ชาเขียว 4 in 1 แบบซองชงพร้อมดื่ม ที่รวมผงชาเขียว 
+                ครีมแท้ นมผง และน้ำตาลไว้ในซองเดียวเพื่อความสะดวก เว็บไซต์นี้มุ่งเน้นให้ข้อมูลสินค้าและราคาที่ชัดเจน 
+                เพื่อช่วยผู้บริโภคในการตัดสินใจเลือกผลิตภัณฑ์ แต่ไม่ได้เปิดให้สั่งซื้อโดยตรงผ่านระบบ</p>
+      <a href="/about"
+        class="inline-flex items-center gap-3 bg-white text-matcha-dark px-8 py-4 rounded-2xl font-semibold hover:bg-cream transition-all hover:shadow-xl hover:-translate-y-1 group">
+        <i class="fas fa-search"></i>
+        About us
+        <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative bg-cream overflow-hidden">
+    <!-- Wave Top -->
+    <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
+      <svg class="relative block w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path
+          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+          fill="#809671"></path>
+      </svg>
+    </div>
+
+    <!-- Decorative Leaves -->
+    <div class="absolute top-20 left-10 text-matcha/10 text-6xl"><i class="fas fa-leaf"></i></div>
+    <div class="absolute top-32 right-16 text-matcha/10 text-4xl rotate-45"><i class="fas fa-leaf"></i></div>
+    <div class="absolute bottom-20 left-1/4 text-matcha/10 text-5xl -rotate-12"><i class="fas fa-leaf"></i></div>
+
+    <!-- Main Footer Content -->
+    <div class="relative z-10 pt-24 pb-8">
+      <div class="container mx-auto px-6">
+
+        <!-- Top Section -->
+        <div class="text-center mb-12">
+          <!-- Logo with soft glow -->
+          <div class="inline-block mb-6 relative">
+            <div class="absolute inset-0 bg-matcha/20 rounded-full blur-xl scale-150"></div>
+            <div class="relative bg-white p-5 rounded-3xl shadow-lg border border-matcha/10">
+              <img src="../assets/images/logo.png" alt="I KHEAW Logo" class="w-16 h-16 object-contain">
+            </div>
+          </div>
+
+          <h3 class="font-playfair text-2xl md:text-3xl font-bold text-matcha-dark mb-2">I KHEAW</h3>
+          <p class="text-matcha/70 mb-6">ITDS241 Project I KHEAW</p>
+
+          <!-- Social Icons -->
+          <div class="flex justify-center gap-3">
+            <a href="#"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fab fa-facebook-f text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="#"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fab fa-instagram text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="#"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fab fa-line text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="mailto:matchaikheaw@gmail.com"
+              class="group w-11 h-11 bg-white rounded-2xl shadow-md border border-matcha/10 flex items-center justify-center hover:bg-matcha hover:border-matcha hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <i class="fas fa-envelope text-matcha group-hover:text-white transition-colors"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-6 border-t border-matcha/10">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+            <p class="text-gray-400 text-sm">
+              &copy; 2025 I KHEAW. All rights reserved.
+            </p>
+            <p class="text-gray-400 text-sm flex items-center gap-1">
+              Made with
+              <i class="fas fa-heart text-red-400 text-xs animate-pulse"></i>
+              by ITDS241 Team
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-md');
+      } else {
+        navbar.classList.remove('shadow-md');
+      }
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>

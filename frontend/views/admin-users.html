@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - I KHEAW</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'prompt': ['Prompt', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'matcha': '#809671',
+                        'matcha-dark': '#6a7d5e',
+                        'matcha-light': '#a8b89d',
+                        'cream': '#f8f6f3',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #809671;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a7d5e;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(128, 150, 113, 0.1);
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-cream min-h-screen font-prompt">
+    <!-- Navigation Bar -->
+    <header id="navbar"
+        class="bg-white/90 backdrop-blur-lg border-b border-matcha/10 fixed top-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo & Brand -->
+                <a href="/" class="flex items-center gap-3 group">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 bg-matcha/20 rounded-2xl blur-md scale-110 group-hover:scale-125 transition-transform">
+                        </div>
+                        <div
+                            class="relative bg-white p-2 rounded-2xl shadow-sm border border-matcha/10 group-hover:shadow-md transition-all">
+                            <img src="/assets/images/logo.png" alt="I KHEAW Logo" class="w-9 h-9 object-contain">
+                        </div>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="font-playfair text-lg font-bold text-matcha-dark leading-tight">I KHEAW</h1>
+                        <p class="text-[9px] text-matcha/60 tracking-wider">Admin Portal</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex items-center gap-1">
+                    <li>
+                        <a href="/admin/products"
+                            class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+                            <i class="fas fa-box text-xs mr-1.5 opacity-50"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/users"
+                            class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
+                            <i class="fas fa-users text-xs mr-1.5"></i>
+                            Users
+                        </a>
+                    </li>
+                    <li class="ml-2">
+                        <a href="/"
+                            class="inline-flex items-center gap-2 border border-matcha/20 text-matcha px-5 py-2 rounded-xl text-sm font-medium hover:bg-matcha hover:text-white transition-all">
+                            <i class="fas fa-sign-out-alt text-xs"></i>
+                            Exit Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Spacer for fixed navbar -->
+    <div class="h-[72px]"></div>
+
+    <!-- Main Content -->
+    <main class="relative py-20 bg-gradient-to-b from-matcha/20 to-cream overflow-hidden min-h-screen">
+        <!-- Decorative elements -->
+        <div class="absolute top-10 left-10 text-matcha/10 text-6xl animate-float"><i class="fas fa-leaf"></i></div>
+        <div class="absolute bottom-10 right-10 text-matcha/10 text-4xl animate-float" style="animation-delay: 1s;"><i
+                class="fas fa-leaf"></i></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+
+            <!-- Header Section -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                <div>
+                    <h1 class="font-playfair text-3xl md:text-4xl font-bold text-matcha-dark mb-2">User Management
+                    </h1>
+                    <p class="text-gray-500">จัดการข้อมูลบัญชีผู้ใช้</p>
+                </div>
+
+                <button onclick="openModal('add')"
+                    class="bg-gradient-to-r from-matcha to-matcha-dark text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-matcha/20 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2">
+                    <i class="fas fa-user-plus"></i>
+                    เพิ่มผู้ใช้ใหม่
+                </button>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-matcha/10 flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-matcha/10 rounded-2xl flex items-center justify-center text-matcha text-xl">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Total Users</p>
+                        <h3 class="text-2xl font-bold text-gray-800" id="total-users">0</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-matcha/10 flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 text-xl">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Admins</p>
+                        <h3 class="text-2xl font-bold text-gray-800">2</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-matcha/10 flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-500 text-xl">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Active Now</p>
+                        <h3 class="text-2xl font-bold text-gray-800">5</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filter -->
+            <div
+                class="bg-white p-4 rounded-2xl shadow-sm border border-matcha/10 mb-6 flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="search-input" placeholder="ค้นหาชื่อผู้ใช้, อีเมล..."
+                        class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-matcha/30 focus:outline-none transition-all">
+                </div>
+                <div class="flex gap-3">
+                    <select id="role-filter"
+                        class="px-4 py-3 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-matcha/30 focus:outline-none text-gray-600 cursor-pointer">
+                        <option value="all">All Roles</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Editor">Editor</option>
+                        <option value="User">User</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="bg-white rounded-3xl shadow-sm border border-matcha/10 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50/50 border-b border-gray-100">
+                                <th class="p-6 font-medium text-gray-500 text-sm">User</th>
+                                <th class="p-6 font-medium text-gray-500 text-sm">Role</th>
+                                <th class="p-6 font-medium text-gray-500 text-sm">Email</th>
+                                <th class="p-6 font-medium text-gray-500 text-sm">Status</th>
+                                <th class="p-6 font-medium text-gray-500 text-sm text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-list">
+                            <!-- User items will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="p-6 border-t border-gray-100 flex justify-between items-center">
+                    <p class="text-sm text-gray-500">Showing <span class="font-medium text-gray-800">1-10</span> of
+                        <span class="font-medium text-gray-800">12</span> results
+                    </p>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-matcha hover:text-matcha transition-all">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button
+                            class="w-10 h-10 rounded-xl bg-matcha text-white flex items-center justify-center shadow-lg shadow-matcha/20">1</button>
+                        <button
+                            class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-matcha hover:text-matcha transition-all">2</button>
+                        <button
+                            class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-matcha hover:text-matcha transition-all">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div id="user-modal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div
+                class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all scale-100">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="font-playfair text-2xl font-bold text-matcha-dark" id="modal-title">Add New User
+                        </h3>
+                        <button onclick="closeModal()"
+                            class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <form id="user-form" class="space-y-6">
+                        <input type="hidden" id="user-id">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-700">Username</label>
+                                <input type="text" id="user-name" required
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="user-email" required
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-700">Role</label>
+                                <select id="user-role"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Editor">Editor</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-700">Status</label>
+                                <select id="user-status"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                    <option value="Banned">Banned</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">Profile Image URL</label>
+                            <div class="flex gap-4">
+                                <input type="text" id="user-image"
+                                    class="flex-grow px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all"
+                                    placeholder="https://...">
+                                <button type="button"
+                                    class="px-6 py-3 bg-gray-100 text-gray-600 rounded-xl hover:bg-gray-200 transition-all">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex gap-4">
+                            <button type="button" onclick="closeModal()"
+                                class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-all">Cancel</button>
+                            <button type="submit"
+                                class="flex-1 px-6 py-3 bg-matcha text-white font-medium rounded-xl hover:bg-matcha-dark shadow-lg shadow-matcha/20 transition-all">Save
+                                User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onclick="closeDeleteModal()">
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div
+                class="bg-white rounded-3xl shadow-2xl w-full max-w-md transform transition-all scale-100 text-center p-8">
+                <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-user-times text-3xl text-red-500"></i>
+                </div>
+                <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-2">Delete User?</h3>
+                <p class="text-gray-500 mb-8">Are you sure you want to delete this user? This action cannot be
+                    undone.</p>
+                <div class="flex gap-4">
+                    <button onclick="closeDeleteModal()"
+                        class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-all">Cancel</button>
+                    <button onclick="confirmDelete()"
+                        class="flex-1 px-6 py-3 bg-red-500 text-white font-medium rounded-xl hover:bg-red-600 shadow-lg shadow-red-500/20 transition-all">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock Data
+        let users = [
+            { id: 1, name: 'admin', email: 'admin@ikheaw.com', role: 'Admin', status: 'Active', image: 'https://ui-avatars.com/api/?name=Admin&background=809671&color=fff' },
+            { id: 2, name: 'editor_jane', email: 'jane@ikheaw.com', role: 'Editor', status: 'Active', image: 'https://ui-avatars.com/api/?name=Jane&background=random' },
+            { id: 3, name: 'user_bob', email: 'bob@gmail.com', role: 'User', status: 'Inactive', image: 'https://ui-avatars.com/api/?name=Bob&background=random' },
+            { id: 4, name: 'test_user', email: 'test@hotmail.com', role: 'User', status: 'Banned', image: 'https://ui-avatars.com/api/?name=Test&background=random' },
+        ];
+
+        let deleteId = null;
+
+        // Render Users
+        function renderUsers(filter = '') {
+            const tbody = document.getElementById('user-list');
+            tbody.innerHTML = '';
+
+            const filtered = users.filter(u => u.name.toLowerCase().includes(filter.toLowerCase()) || u.email.toLowerCase().includes(filter.toLowerCase()));
+            document.getElementById('total-users').innerText = filtered.length;
+
+            filtered.forEach(u => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-50 hover:bg-gray-50/50 transition-colors';
+                tr.innerHTML = `
+          <td class="p-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                <img src="${u.image}" alt="${u.name}" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">${u.name}</h4>
+                <p class="text-xs text-gray-400">ID: #00${u.id}</p>
+              </div>
+            </div>
+          </td>
+          <td class="p-6">
+            <span class="px-3 py-1 rounded-lg ${getRoleColor(u.role)} text-sm font-medium">${u.role}</span>
+          </td>
+          <td class="p-6">
+            <span class="text-gray-600">${u.email}</span>
+          </td>
+          <td class="p-6">
+            <span class="px-3 py-1 rounded-lg text-sm font-medium ${getStatusColor(u.status)}">
+              <i class="fas fa-circle text-[8px] mr-1"></i>
+              ${u.status}
+            </span>
+          </td>
+          <td class="p-6 text-right">
+            <div class="flex justify-end gap-2">
+              <button onclick="openModal('edit', ${u.id})" class="w-9 h-9 rounded-lg bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex items-center justify-center">
+                <i class="fas fa-pen text-xs"></i>
+              </button>
+              <button onclick="openDeleteModal(${u.id})" class="w-9 h-9 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-all flex items-center justify-center">
+                <i class="fas fa-trash text-xs"></i>
+              </button>
+            </div>
+          </td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function getStatusColor(status) {
+            if (status === 'Active') return 'bg-green-100 text-green-600';
+            if (status === 'Inactive') return 'bg-gray-100 text-gray-600';
+            return 'bg-red-100 text-red-600';
+        }
+
+        function getRoleColor(role) {
+            if (role === 'Admin') return 'bg-purple-100 text-purple-600';
+            if (role === 'Editor') return 'bg-blue-100 text-blue-600';
+            return 'bg-gray-100 text-gray-600';
+        }
+
+        // Modal Functions
+        function openModal(mode, id = null) {
+            const modal = document.getElementById('user-modal');
+            const title = document.getElementById('modal-title');
+            const form = document.getElementById('user-form');
+
+            modal.classList.remove('hidden');
+
+            if (mode === 'edit') {
+                title.innerText = 'Edit User';
+                const user = users.find(u => u.id === id);
+                document.getElementById('user-id').value = user.id;
+                document.getElementById('user-name').value = user.name;
+                document.getElementById('user-email').value = user.email;
+                document.getElementById('user-role').value = user.role;
+                document.getElementById('user-status').value = user.status;
+                document.getElementById('user-image').value = user.image;
+            } else {
+                title.innerText = 'Add New User';
+                form.reset();
+                document.getElementById('user-id').value = '';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('user-modal').classList.add('hidden');
+        }
+
+        function openDeleteModal(id) {
+            deleteId = id;
+            document.getElementById('delete-modal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            deleteId = null;
+            document.getElementById('delete-modal').classList.add('hidden');
+        }
+
+        function confirmDelete() {
+            if (deleteId) {
+                users = users.filter(u => u.id !== deleteId);
+                renderUsers();
+                closeDeleteModal();
+            }
+        }
+
+        // Form Submit
+        document.getElementById('user-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('user-id').value;
+            const newUser = {
+                id: id ? parseInt(id) : users.length + 1,
+                name: document.getElementById('user-name').value,
+                email: document.getElementById('user-email').value,
+                role: document.getElementById('user-role').value,
+                status: document.getElementById('user-status').value,
+                image: document.getElementById('user-image').value || `https://ui-avatars.com/api/?name=${document.getElementById('user-name').value}&background=random`
+            };
+
+            if (id) {
+                const index = users.findIndex(u => u.id == id);
+                users[index] = newUser;
+            } else {
+                users.push(newUser);
+            }
+
+            renderUsers();
+            closeModal();
+        });
+
+        // Search
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            renderUsers(e.target.value);
+        });
+
+        // Initial Render
+        renderUsers();
+    </script>
+</body>
+
+</html>

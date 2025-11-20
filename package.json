@@ -1,0 +1,27 @@
+{
+  "name": "itds241-project",
+  "version": "1.0.0",
+  "description": "เว็บไซต์แคตตาล็อกสินค้าชาเขียวและมัทฉะคุณภาพ สำหรับโปรเจค ITDS241",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:client": "cd frontend && npm install && npm run dev",
+    "start:server": "cd backend && npm install && npm run dev",
+    "start:all": "concurrently \"npm run start:server\" \"npm run start:client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jirawat2105/ITDS241-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jirawat2105/ITDS241-Project/issues"
+  },
+  "homepage": "https://github.com/Jirawat2105/ITDS241-Project#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
