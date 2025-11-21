@@ -192,10 +192,6 @@
                             <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
                                 <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             </div>
-                            <!-- Citation -->
-                            <div class="mt-4 text-xs text-gray-400 italic text-center">
-                                <i class="fas fa-camera mr-1"></i> ${product.citation}
-                            </div>
                         </div>
 
                         <!-- Info Section -->
@@ -208,7 +204,6 @@
                                 <div class="flex items-center gap-4 text-sm text-gray-500 mb-6">
                                     <span class="flex items-center gap-1"><i class="fas fa-star text-orange-300"></i> Grade: ${product.grade}</span>
                                     <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                                    <span class="flex items-center gap-1"><i class="fas fa-globe-asia text-matcha/50"></i> ${product.origin}</span>
                                 </div>
                                 <div class="text-3xl font-bold text-matcha-dark mb-8">฿${product.price}</div>
                             </div>
@@ -219,15 +214,8 @@
                                     ${product.description}
                                 </p>
                             </div>
-
-                            <div class="flex gap-4 mt-auto">
-                                <button class="flex-1 bg-matcha text-white py-4 rounded-xl font-bold shadow-lg shadow-matcha/20 hover:bg-matcha-dark hover:-translate-y-1 transition-all">
-                                    Add to Cart
-                                </button>
-                                <button class="w-14 h-14 border border-gray-200 rounded-xl flex items-center justify-center text-gray-400 hover:border-matcha hover:text-matcha transition-all">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
+                        </div>
+                        </div>
                         </div>
                     </div>
                 `;
