@@ -46,7 +46,7 @@ app.get('/usersadmin', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'usersadmin.html'));
 });
 
-app.get('/search2', (req, res) => {
+app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'productdetail.html'));
 });
 
