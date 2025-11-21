@@ -65,7 +65,7 @@
         <nav class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo & Brand -->
-                <a href="/l" class="flex items-center gap-3 group">
+                <a href="/" class="flex items-center gap-3 group">
                     <div class="relative">
                         <div
                             class="absolute inset-0 bg-matcha/20 rounded-2xl blur-md scale-110 group-hover:scale-125 transition-transform">
@@ -84,8 +84,7 @@
                 <!-- Desktop Menu -->
                 <ul class="hidden md:flex items-center gap-1">
                     <li>
-                        <a href="/"
-                            class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
+                        <a href="/" class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
                             <i class="fas fa-home text-xs mr-1.5 opacity-50"></i>
                             Home
                         </a>
@@ -111,7 +110,7 @@
                         </a>
                     </li>
                     <li class="ml-2">
-                        <a href="loginl"
+                        <a href="login"
                             class="inline-flex items-center gap-2 bg-gradient-to-r from-matcha to-matcha-dark text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all">
                             <i class="fas fa-sparkles text-xs"></i>
                             Login
@@ -184,7 +183,7 @@
                             </div>
                             <h3 class="font-playfair text-xl font-bold text-gray-800 mb-2">Product Not Found</h3>
                             <p class="text-gray-500 mb-6">The product you are looking for does not exist.</p>
-                            <a href="product.html" class="inline-block bg-matcha text-white px-6 py-2 rounded-xl hover:bg-matcha-dark transition-colors">View All Products</a>
+                            <a href="product" class="inline-block bg-matcha text-white px-6 py-2 rounded-xl hover:bg-matcha-dark transition-colors">View All Products</a>
                         </div>
                     `;
                     return;
@@ -197,7 +196,7 @@
                         <!-- Image Section -->
                         <div class="relative group">
                             <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
-                                <img src="${product.imageUrl || '../assets/images/logo.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='../assets/images/logo.png'">
+                                <img src="${convertGoogleDriveUrl(product.imageUrl) || '../assets/images/logo.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='../assets/images/logo.png'">
                             </div>
                         </div>
 

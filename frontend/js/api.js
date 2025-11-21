@@ -1,5 +1,25 @@
 const API_BASE_URL = 'http://localhost:3001/api';
 
+/**
+ * Helper function to convert Google Drive share URL to direct image URL
+ * @param {string} url - Original Google Drive URL
+ * @returns {string} - Direct image URL or original URL if not a Drive link
+ */
+function convertGoogleDriveUrl(url) {
+    if (!url) return url;
+
+    // Check if it's a Google Drive URL
+    const drivePattern = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const match = url.match(drivePattern);
+
+    if (match && match[1]) {
+        const fileId = match[1];
+        return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    }
+
+    return url; // Return original URL if not a Drive link
+}
+
 // Helper function for GET requests
 async function get(endpoint) {
     try {
