@@ -46,6 +46,10 @@ app.get('/usersadmin', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'usersadmin.html'));
 });
 
+app.get('/search2', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'productdetail.html'));
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'views', 'not-found.html'));
