@@ -49,67 +49,50 @@ const seedData = async () => {
             {
                 name: 'Matcha Latte',
                 category: 'Drinks',
-                price: 85,
-                stock: 50,
-                description: 'เครื่องดื่มมัทฉะลาเต้ รสชาติกลมกล่อม หอมหวานจากนมสด',
-                imageUrl: 'https://images.unsplash.com/photo-1536013564-89a7e0a8c1c2?w=500'
+                price: 95,
+                description: 'ผมใช้เวลาอยู่นานกว่าจะลงตัวกับแก้วนี้... โจทย์ของผมคือ จะทำยังไงให้คนที่ไม่กินชาเขียว หลงรักชาเขียวได้มัทฉะมีความเข้มข้นและเอกลักษณ์สูงมาก ถ้าใส่นมน้อยไปก็ขม ถ้าใส่มากไปกลิ่นชาก็หาย ผมทดลองปรับอัตราส่วนวันแล้ววันเล่า จนค้นพบจุด Sweet Spot จุดที่ความหอมของมัทฉะพุ่งขึ้นจมูกทันทีที่ยก ดื่ม แต่สัมผัสในปากกลับนุ่มละมุนเหมือนฟองนมแก้วที่คุณเห็นอยู่นี้ ไม่ใช่แค่ชาเขียวนมธรรมดา แต่มันคือผลลัพธ์ของการทดลองนับร้อยครั้ง เพื่อให้ได้รสสัมผัสที่ นุ่มลึก ที่สุดในแบบของผมครับ',
+                imageUrl: 'https://drive.google.com/file/d/1eJaJc1WiRBA61Decjetev4D0XKqoB1Ab/view'
             },
+
             {
-                name: 'Green Tea Latte',
+                name: 'Hojicha Latte',
                 category: 'Drinks',
-                price: 75,
-                stock: 45,
+                price: 85,
                 description: 'ชาเขียวลาเต้ รสชาติหอมกรุ่น ผสมนมสดเข้มข้น',
                 imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500'
             },
+
             {
-                name: 'Matcha Powder Premium',
-                category: 'Powder',
-                price: 350,
-                stock: 30,
+                name: 'Genmaicha Latte',
+                category: 'Drinks',
+                price: 105,
                 description: 'ผงมัทฉะเกรดพรีเมี่ยม นำเข้าจากญี่ปุ่น คุณภาพสูง',
                 imageUrl: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=500'
             },
+
             {
-                name: 'Organic Green Tea Powder',
+                name: 'Normal Powder',
                 category: 'Powder',
-                price: 280,
-                stock: 25,
+                price: 250,
                 description: 'ผงชาเขียวออร์แกนิค ปลอดสารเคมี เหมาะสำหรับทำเครื่องดื่ม',
                 imageUrl: 'https://images.unsplash.com/photo-1563822249366-3a0b0a8e8a6e?w=500'
             },
+
             {
-                name: 'Matcha 4 in 1',
-                category: '4in1',
-                price: 120,
-                stock: 60,
+                name: 'Ceremonial Powder',
+                category: 'Powder',
+                price: 2500,
                 description: 'มัทฉะ 4 in 1 สูตรพร้อมดื่ม ผสมนม น้ำตาล และครีมเมอร์',
                 imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500'
             },
+
             {
-                name: 'Green Tea 4 in 1',
+                name: 'Matcha 4 in 1',
                 category: '4in1',
-                price: 100,
-                stock: 55,
+                price: 250,
                 description: 'ชาเขียว 4 in 1 รสชาติกลมกล่อม ชงง่าย พกพาสะดวก',
                 imageUrl: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=500'
             },
-            {
-                name: 'Iced Matcha',
-                category: 'Drinks',
-                price: 90,
-                stock: 40,
-                description: 'มัทฉะเย็น สดชื่น เหมาะสำหรับวันร้อนๆ',
-                imageUrl: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=500'
-            },
-            {
-                name: 'Matcha Frappe',
-                category: 'Drinks',
-                price: 110,
-                stock: 35,
-                description: 'มัทฉะปั่น เย็นฉ่ำ หอมหวาน เข้มข้น',
-                imageUrl: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500'
-            }
         ];
 
         const createdProducts = await Product.insertMany(products);
