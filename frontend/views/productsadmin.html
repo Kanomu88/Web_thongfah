@@ -341,243 +341,41 @@
                         class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-all">Cancel</button>
                     <button onclick="confirmDelete()"
                         class="flex-1 px-6 py-3 bg-red-500 text-white font-medium rounded-xl hover:bg-red-600 shadow-lg shadow-red-500/20 transition-all">Delete</button>
-                    ```
-                    class="bg-gradient-to-r from-matcha to-matcha-dark text-white px-6 py-3 rounded-xl font-medium
-                    shadow-lg shadow-matcha/20 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center
-                    gap-2">
-                    <i class="fas fa-plus"></i>
-                    เพิ่มสินค้าใหม่
-                    </button>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-matcha/10 flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 bg-matcha/10 rounded-2xl flex items-center justify-center text-matcha text-xl">
-                            <i class="fas fa-box-open"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Total Products</p>
-                            <h3 class="text-2xl font-bold text-gray-800" id="total-products">0</h3>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-matcha/10 flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 text-xl">
-                            <i class="fas fa-tags"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Categories</p>
-                            <h3 class="text-2xl font-bold text-gray-800">4</h3>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-matcha/10 flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500 text-xl">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Featured</p>
-                            <h3 class="text-2xl font-bold text-gray-800">12</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Search & Filter -->
-                <div
-                    class="bg-white p-4 rounded-2xl shadow-sm border border-matcha/10 mb-6 flex flex-col md:flex-row gap-4">
-                    <div class="relative flex-grow">
-                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" id="search-input" placeholder="ค้นหาชื่อสินค้า, รหัสสินค้า..."
-                            class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-matcha/30 focus:outline-none transition-all">
-                    </div>
-                    <div class="flex gap-3">
-                        <select id="category-filter"
-                            class="px-4 py-3 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-matcha/30 focus:outline-none text-gray-600 cursor-pointer">
-                            <option value="all">All Categories</option>
-                            <option value="Drinksr">Drinks</option>
-                            <option value="Powder">Powder</option>
-                            <option value="4in1">4 in 1</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Products Table -->
-                <div class="bg-white rounded-3xl shadow-sm border border-matcha/10 overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-gray-50/50 border-b border-gray-100">
-                                    <th class="p-6 font-medium text-gray-500 text-sm">Product</th>
-                                    <th class="p-6 font-medium text-gray-500 text-sm">Category</th>
-                                    <th class="p-6 font-medium text-gray-500 text-sm">Price</th>
-                                    <th class="p-6 font-medium text-gray-500 text-sm text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="product-list">
-                                <!-- Product items will be injected here -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="p-6 border-t border-gray-100 flex justify-between items-center">
-                        <p class="text-sm text-gray-500">Showing <span class="font-medium text-gray-800">1-10</span> of
-                            <span class="font-medium text-gray-800">12</span> results
-                        </p>
-                        <div class="flex gap-2">
-                            <button
-                                class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-matcha hover:text-matcha transition-all">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button
-                                class="w-10 h-10 rounded-xl bg-matcha text-white flex items-center justify-center shadow-lg shadow-matcha/20">1</button>
-                            <button
-                                class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-matcha hover:text-matcha transition-all">2</button>
-                            <button
-                                class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-matcha hover:text-matcha transition-all">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
-            </main>
+        </div>
+    </div>
 
-            <!-- Add/Edit Modal -->
-            <div id="product-modal" class="fixed inset-0 z-[100] hidden">
-                <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onclick="closeModal()">
-                </div>
-                <div class="absolute inset-0 flex items-center justify-center p-4">
-                    <div
-                        class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all scale-100">
-                        <div class="p-8">
-                            <div class="flex justify-between items-center mb-8">
-                                <h3 class="font-playfair text-2xl font-bold text-matcha-dark" id="modal-title">Add New
-                                    Product
-                                </h3>
-                                <button onclick="closeModal()"
-                                    class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
+    <script src="../js/api.js"></script>
+    <script>
+        // Check Auth
+        const user = auth.checkAuth();
+        if (!user.isAdmin) {
+            alert('Access Denied');
+            window.location.href = '/views/index.html';
+        }
 
-                            <form id="product-form" class="space-y-6">
-                                <input type="hidden" id="product-id">
+        let products = [];
+        let deleteId = null;
 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="space-y-2">
-                                        <label class="text-sm font-medium text-gray-700">Product Name</label>
-                                        <input type="text" id="product-name" required
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
-                                    </div>
-                                    <div class="space-y-2">
-                                        <label class="text-sm font-medium text-gray-700">Category</label>
-                                        <select id="product-category"
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
-                                            <option value="Drinks">Drinks</option>
-                                            <option value="Powder">Powder</option>
-                                            <option value="4in1">4 in 1</option>
-                                        </select>
-                                    </div>
-                                </div>
+        // Render Products
+        async function fetchAndRenderProducts(filter = '') {
+            const result = await productService.getAll({ name: filter });
+            if (result.success) {
+                products = result.data;
+                renderProducts(products);
+            }
+        }
 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="space-y-2">
-                                        <label class="text-sm font-medium text-gray-700">Price (THB)</label>
-                                        <input type="number" id="product-price" required
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
-                                    </div>
-                                </div>
+        function renderProducts(items) {
+            const tbody = document.getElementById('product-list');
+            tbody.innerHTML = '';
+            document.getElementById('total-products').innerText = items.length;
 
-                                <div class="space-y-2">
-                                    <label class="text-sm font-medium text-gray-700">Description</label>
-                                    <textarea id="product-desc" rows="4"
-                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all"></textarea>
-                                </div>
-
-                                <div class="space-y-2">
-                                    <label class="text-sm font-medium text-gray-700">Image URL</label>
-                                    <div class="flex gap-4">
-                                        <input type="text" id="product-image"
-                                            class="flex-grow px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all"
-                                            placeholder="https://...">
-                                        <button type="button"
-                                            class="px-6 py-3 bg-gray-100 text-gray-600 rounded-xl hover:bg-gray-200 transition-all">
-                                            <i class="fas fa-image"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="pt-4 flex gap-4">
-                                    <button type="button" onclick="closeModal()"
-                                        class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-all">Cancel</button>
-                                    <button type="submit"
-                                        class="flex-1 px-6 py-3 bg-matcha text-white font-medium rounded-xl hover:bg-matcha-dark shadow-lg shadow-matcha/20 transition-all">Save
-                                        Product</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Delete Confirmation Modal -->
-            <div id="delete-modal" class="fixed inset-0 z-[100] hidden">
-                <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
-                    onclick="closeDeleteModal()">
-                </div>
-                <div class="absolute inset-0 flex items-center justify-center p-4">
-                    <div
-                        class="bg-white rounded-3xl shadow-2xl w-full max-w-md transform transition-all scale-100 text-center p-8">
-                        <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-trash-alt text-3xl text-red-500"></i>
-                        </div>
-                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-2">Delete Product?</h3>
-                        <p class="text-gray-500 mb-8">Are you sure you want to delete this product? This action cannot
-                            be
-                            undone.</p>
-                        <div class="flex gap-4">
-                            <button onclick="closeDeleteModal()"
-                                class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-all">Cancel</button>
-                            <button onclick="confirmDelete()"
-                                class="flex-1 px-6 py-3 bg-red-500 text-white font-medium rounded-xl hover:bg-red-600 shadow-lg shadow-red-500/20 transition-all">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <script src="../js/api.js"></script>
-            <script>
-                // Check Auth
-                const user = auth.checkAuth();
-                if (!user.isAdmin) {
-                    alert('Access Denied');
-                    window.location.href = '/views/index.html';
-                }
-
-                let products = [];
-                let deleteId = null;
-
-                // Render Products
-                async function fetchAndRenderProducts(filter = '') {
-                    const result = await productService.getAll({ name: filter });
-                    if (result.success) {
-                        products = result.data;
-                        renderProducts(products);
-                    }
-                }
-
-                function renderProducts(items) {
-                    const tbody = document.getElementById('product-list');
-                    tbody.innerHTML = '';
-                    document.getElementById('total-products').innerText = items.length;
-
-                    items.forEach(p => {
-                        const tr = document.createElement('tr');
-                        tr.className = 'border-b border-gray-50 hover:bg-gray-50/50 transition-colors';
-                        tr.innerHTML = `
+            items.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-50 hover:bg-gray-50/50 transition-colors';
+                tr.innerHTML = `
           <td class="p-6">
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
@@ -606,105 +404,105 @@
             </div>
           </td>
         `;
-                        tbody.appendChild(tr);
-                    });
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Modal Functions
+        function openModal(mode, id = null) {
+            const modal = document.getElementById('product-modal');
+            const title = document.getElementById('modal-title');
+            const form = document.getElementById('product-form');
+
+            modal.classList.remove('hidden');
+
+            if (mode === 'edit') {
+                title.innerText = 'Edit Product';
+                const product = products.find(p => p._id === id);
+                document.getElementById('product-id').value = product._id;
+                document.getElementById('product-name').value = product.name;
+                document.getElementById('product-category').value = product.category;
+                document.getElementById('product-price').value = product.price;
+                document.getElementById('product-desc').value = product.description;
+                document.getElementById('product-image').value = product.imageUrl;
+            } else {
+                title.innerText = 'Add New Product';
+                form.reset();
+                document.getElementById('product-id').value = '';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function openDeleteModal(id) {
+            deleteId = id;
+            document.getElementById('delete-modal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            deleteId = null;
+            document.getElementById('delete-modal').classList.add('hidden');
+        }
+
+        async function confirmDelete() {
+            if (deleteId) {
+                const result = await productService.delete(deleteId);
+                if (result.success) {
+                    fetchAndRenderProducts();
+                    closeDeleteModal();
+                } else {
+                    alert('Error deleting product: ' + result.message);
                 }
+            }
+        }
 
-                // Modal Functions
-                function openModal(mode, id = null) {
-                    const modal = document.getElementById('product-modal');
-                    const title = document.getElementById('modal-title');
-                    const form = document.getElementById('product-form');
+        // Form Submit
+        document.getElementById('product-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('product-id').value;
+            const productData = {
+                name: document.getElementById('product-name').value,
+                category: document.getElementById('product-category').value,
+                price: document.getElementById('product-price').value,
+                description: document.getElementById('product-desc').value,
+                imageUrl: document.getElementById('product-image').value || 'no-photo.jpg'
+            };
 
-                    modal.classList.remove('hidden');
+            let result;
+            if (id) {
+                result = await productService.update(id, productData);
+            } else {
+                result = await productService.create(productData);
+            }
 
-                    if (mode === 'edit') {
-                        title.innerText = 'Edit Product';
-                        const product = products.find(p => p._id === id);
-                        document.getElementById('product-id').value = product._id;
-                        document.getElementById('product-name').value = product.name;
-                        document.getElementById('product-category').value = product.category;
-                        document.getElementById('product-price').value = product.price;
-                        document.getElementById('product-desc').value = product.description;
-                        document.getElementById('product-image').value = product.imageUrl;
-                    } else {
-                        title.innerText = 'Add New Product';
-                        form.reset();
-                        document.getElementById('product-id').value = '';
-                    }
-                }
-
-                function closeModal() {
-                    document.getElementById('product-modal').classList.add('hidden');
-                }
-
-                function openDeleteModal(id) {
-                    deleteId = id;
-                    document.getElementById('delete-modal').classList.remove('hidden');
-                }
-
-                function closeDeleteModal() {
-                    deleteId = null;
-                    document.getElementById('delete-modal').classList.add('hidden');
-                }
-
-                async function confirmDelete() {
-                    if (deleteId) {
-                        const result = await productService.delete(deleteId);
-                        if (result.success) {
-                            fetchAndRenderProducts();
-                            closeDeleteModal();
-                        } else {
-                            alert('Error deleting product: ' + result.message);
-                        }
-                    }
-                }
-
-                // Form Submit
-                document.getElementById('product-form').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const id = document.getElementById('product-id').value;
-                    const productData = {
-                        name: document.getElementById('product-name').value,
-                        category: document.getElementById('product-category').value,
-                        price: document.getElementById('product-price').value,
-                        description: document.getElementById('product-desc').value,
-                        imageUrl: document.getElementById('product-image').value || 'no-photo.jpg'
-                    };
-
-                    let result;
-                    if (id) {
-                        result = await productService.update(id, productData);
-                    } else {
-                        result = await productService.create(productData);
-                    }
-
-                    if (result.success) {
-                        fetchAndRenderProducts();
-                        closeModal();
-                    } else {
-                        alert('Error saving product: ' + result.message);
-                    }
-                });
-
-                // Search
-                document.getElementById('search-input').addEventListener('input', (e) => {
-                    fetchAndRenderProducts(e.target.value);
-                });
-
-                // Category Filter
-                document.getElementById('category-filter').addEventListener('change', async (e) => {
-                    const category = e.target.value === 'all' ? '' : e.target.value;
-                    const result = await productService.getAll({ category });
-                    if (result.success) {
-                        products = result.data;
-                        renderProducts(products);
-                    }
-                });
-
-                // Initial Render
+            if (result.success) {
                 fetchAndRenderProducts();
-            </script>
+                closeModal();
+            } else {
+                alert('Error saving product: ' + result.message);
+            }
+        });
+
+        // Search
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            fetchAndRenderProducts(e.target.value);
+        });
+
+        // Category Filter
+        document.getElementById('category-filter').addEventListener('change', async (e) => {
+            const category = e.target.value === 'all' ? '' : e.target.value;
+            const result = await productService.getAll({ category });
+            if (result.success) {
+                products = result.data;
+                renderProducts(products);
+            }
+        });
+
+        // Initial Render
+        fetchAndRenderProducts();
+    </script>
 
 </body>
 
