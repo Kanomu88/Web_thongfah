@@ -82,29 +82,42 @@
                 </a>
 
                 <!-- Desktop Menu -->
-                <ul class="hidden md:flex items-center gap-8">
-                    <li><a href="../views/index.html"
-                            class="text-gray-600 hover:text-matcha font-medium transition-colors">Home</a></li>
-                    <li><a href="../views/product.html"
-                            class="text-gray-600 hover:text-matcha font-medium transition-colors">Product</a></li>
-                    <li><a href="../views/about.html"
-                            class="text-gray-600 hover:text-matcha font-medium transition-colors">About
-                            us</a></li>
+                <ul class="hidden md:flex items-center gap-1">
+                    <li>
+                        <a href="../views/index.html"
+                            class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
+                            <i class="fas fa-home text-xs mr-1.5 opacity-50"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../views/product.html"
+                            class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+                            <i class="fas fa-leaf text-xs mr-1.5 opacity-50"></i>
+                            Product
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../views/about.html"
+                            class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+                            <i class="fas fa-heart text-xs mr-1.5 opacity-50"></i>
+                            About us
+                        </a>
+                    </li>
+                    <li class="ml-1">
+                        <a href="../views/search.html"
+                            class="flex items-center justify-center w-9 h-9 text-gray-400 hover:text-matcha hover:bg-matcha/10 rounded-xl transition-all">
+                            <i class="fas fa-search text-sm"></i>
+                        </a>
+                    </li>
+                    <li class="ml-2">
+                        <a href="../views/login.html"
+                            class="inline-flex items-center gap-2 bg-gradient-to-r from-matcha to-matcha-dark text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                            <i class="fas fa-sparkles text-xs"></i>
+                            Login
+                        </a>
+                    </li>
                 </ul>
-
-                <!-- Right Actions -->
-                <div class="flex items-center gap-4">
-                    <a href="../views/search.html"
-                        class="w-10 h-10 rounded-full bg-matcha/10 text-matcha flex items-center justify-center hover:bg-matcha hover:text-white transition-all">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <a href="../views/login.html"
-                        class="hidden md:inline-flex px-6 py-2 bg-matcha text-white rounded-full font-medium shadow-lg shadow-matcha/20 hover:bg-matcha-dark hover:-translate-y-0.5 transition-all">
-                        Login
-                    </a>
-                </div>
-            </div>
-        </nav>
     </header>
 
     <!-- Spacer for fixed navbar -->
