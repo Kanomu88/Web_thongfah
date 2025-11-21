@@ -141,7 +141,7 @@
 
       <div class="w-full max-w-md">
         <!-- Back button -->
-        <a href="../views/index.html"
+        <a href="/"
           class="inline-flex items-center gap-2 text-gray-400 hover:text-matcha mb-8 transition-colors group">
           <i class="fas fa-arrow-left text-sm group-hover:-translate-x-1 transition-transform"></i>
           <span class="text-sm">กลับหน้าหลัก</span>
@@ -278,11 +278,11 @@
 
           setTimeout(() => {
             if (result.data.isAdmin) {
-              window.location.href = '../views/productsadmin.html';
+              window.location.href = 'productsadmin';
             } else {
-              window.location.href = '../views/index.html';
+              window.location.href = 'index';
             }
-          }, 1000);
+          }, 500);
         } else {
           errorDiv.querySelector('span').textContent = result.message;
           errorDiv.classList.remove('hidden');

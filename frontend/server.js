@@ -38,6 +38,10 @@ app.get('/product', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'product.html'));
 });
 
+app.get('/productsadmin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'product.html'));
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'views', 'not-found.html'));
