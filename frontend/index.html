@@ -112,6 +112,11 @@
             <h1 class="font-playfair text-lg font-bold text-matcha-dark leading-tight">I KHEAW</h1>
             <p class="text-[9px] text-matcha/60 tracking-wider">Matcha & Tea</p>
           </div>
+          <!--weather-api-->
+          <div id="weather-box" class="hidden md:flex items-center gap-2 text-matcha text-sm ml-6"> 
+            <i class="fas fa-cloud text-lg"></i>
+            <span id="weather-temp">--°C</span>
+          </div>
         </a>
 
         <!-- Desktop Menu -->
@@ -215,7 +220,7 @@
       <div class="text-center text-white px-4 animate-fade-in">
 
         <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-4 text-shadow">I KHEAW</h1>
-        <p class="text-xl md:text-2xl font-light mb-3 text-shadow">Premium Matcha &  Tea</p>
+        <p class="text-xl md:text-2xl font-light mb-3 text-shadow">Premium Matcha & Tea</p>
         <p class="text-white/70 text-sm mb-8 max-w-md mx-auto">ค้นหาข้อมูลชาเขียวคุณภาพ
           เพื่อช่วยให้คุณเลือกสิ่งที่ดีที่สุด</p>
 
@@ -245,7 +250,7 @@
   </section>
 
 
-  
+
 
   <!-- Menu Section -->
   <section class="py-20 bg-cream">
@@ -379,13 +384,14 @@
       </div>
 
       <h2 class="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">I KHEAW</h2>
-      <p class="text-white/80 mb-8 max-w-xl mx-auto">ธุรกิจนี้เป็นเว็บไซต์ที่จัดทำขึ้นเพื่อแสดงรายละเอียดเกี่ยวกับชาเขียวคุณภาพในหลากหลายรูปแบบ 
-                โดยแบ่งออกเป็น 3 ประเภทหลัก ๆ ได้แก่ ประเภทที่ 1 ชาเขียวลาเต้ ซึ่งมี 3 ชนิดคือ Matcha, 
-                Hojicha และ Genmaicha ที่ให้รสชาติและเอกลักษณ์แตกต่างกันไป ประเภทที่ 2 ชาเขียวแบบผง 
-                ซึ่งมีทั้งเกรดปกติและเกรดพิธีการ ครอบคลุมทั้งแบบผลิตในประเทศและนำเข้า เหมาะสำหรับผู้ที่ต้อง
-                การนำไปชงเองตามความต้องการ และประเภทที่ 3 ชาเขียว 4 in 1 แบบซองชงพร้อมดื่ม ที่รวมผงชาเขียว 
-                ครีมแท้ นมผง และน้ำตาลไว้ในซองเดียวเพื่อความสะดวก เว็บไซต์นี้มุ่งเน้นให้ข้อมูลสินค้าและราคาที่ชัดเจน 
-                เพื่อช่วยผู้บริโภคในการตัดสินใจเลือกผลิตภัณฑ์ แต่ไม่ได้เปิดให้สั่งซื้อโดยตรงผ่านระบบ</p>
+      <p class="text-white/80 mb-8 max-w-xl mx-auto">
+        ธุรกิจนี้เป็นเว็บไซต์ที่จัดทำขึ้นเพื่อแสดงรายละเอียดเกี่ยวกับชาเขียวคุณภาพในหลากหลายรูปแบบ
+        โดยแบ่งออกเป็น 3 ประเภทหลัก ๆ ได้แก่ ประเภทที่ 1 ชาเขียวลาเต้ ซึ่งมี 3 ชนิดคือ Matcha,
+        Hojicha และ Genmaicha ที่ให้รสชาติและเอกลักษณ์แตกต่างกันไป ประเภทที่ 2 ชาเขียวแบบผง
+        ซึ่งมีทั้งเกรดปกติและเกรดพิธีการ ครอบคลุมทั้งแบบผลิตในประเทศและนำเข้า เหมาะสำหรับผู้ที่ต้อง
+        การนำไปชงเองตามความต้องการ และประเภทที่ 3 ชาเขียว 4 in 1 แบบซองชงพร้อมดื่ม ที่รวมผงชาเขียว
+        ครีมแท้ นมผง และน้ำตาลไว้ในซองเดียวเพื่อความสะดวก เว็บไซต์นี้มุ่งเน้นให้ข้อมูลสินค้าและราคาที่ชัดเจน
+        เพื่อช่วยผู้บริโภคในการตัดสินใจเลือกผลิตภัณฑ์ แต่ไม่ได้เปิดให้สั่งซื้อโดยตรงผ่านระบบ</p>
       <a href="/about"
         class="inline-flex items-center gap-3 bg-white text-matcha-dark px-8 py-4 rounded-2xl font-semibold hover:bg-cream transition-all hover:shadow-xl hover:-translate-y-1 group">
         <i class="fas fa-search"></i>
@@ -493,6 +499,33 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+
+    //Weather
+    const API_KEY = "bc98b8800cccdfabf24c9840fc7524ab";
+
+    async function loadWeather() {
+      try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=13.736717&lon=100.523186&appid=${API_KEY}&units=metric`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        document.getElementById("weather-temp").textContent =
+          Math.round(data.main.temp) + "°C";
+
+        const icon = data.weather[0].icon;
+        const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+
+        document.getElementById("weather-box").innerHTML = `
+        <img src="${iconUrl}" class="w-6 h-6">
+        <span>${Math.round(data.main.temp)}°C</span>
+      `;
+      } catch (err) {
+        console.log("Weather API Error:", err);
+      }
+    }
+
+    loadWeather();
   </script>
 </body>
 
