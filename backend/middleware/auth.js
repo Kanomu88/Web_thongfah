@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Protect routes - ตรวจสอบว่า user login แล้วหรือยัง
+//ตรวจสอบว่า user login แล้วหรือยัง
 exports.protect = async (req, res, next) => {
     let token;
 
-    // ตรวจสอบ token จาก header
+    // ตรวจสอบ token 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
     }
@@ -41,7 +41,7 @@ exports.protect = async (req, res, next) => {
     }
 };
 
-// Admin only - ตรวจสอบว่าเป็น admin หรือไม่
+// ตรวจสอบว่าเป็น admin หรือไม่
 exports.adminOnly = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
         next();

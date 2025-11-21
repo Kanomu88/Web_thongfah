@@ -3,14 +3,14 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Helper function to generate JWT token
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET || 'your-secret-key', {
         expiresIn: '30d'
     });
 };
 
-// POST /api/auth/login
+
 router.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body;
@@ -22,7 +22,7 @@ router.post('/login', async (req, res, next) => {
             });
         }
 
-        // ค้นหาผู้ใช้
+        //ค้นหาผู้ใช้
         const user = await User.findOne({ username });
 
         if (!user) {
@@ -32,7 +32,7 @@ router.post('/login', async (req, res, next) => {
             });
         }
 
-        // ตรวจสอบรหัสผ่าน
+        //ตรวจสอบรหัสผ่าน
         const isMatch = await user.matchPassword(password);
 
         if (!isMatch) {
@@ -80,7 +80,7 @@ router.post('/register', async (req, res, next) => {
             });
         }
 
-        // สร้างผู้ใช้ใหม่
+        //สร้างผู้ใช้ใหม่
         const user = await User.create({
             username,
             password,

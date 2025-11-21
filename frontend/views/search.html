@@ -81,7 +81,7 @@
         <nav class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo & Brand -->
-                <a href="../views/index.html" class="flex items-center gap-3 group">
+                <a href="/" class="flex items-center gap-3 group">
                     <div class="relative">
                         <div
                             class="absolute inset-0 bg-matcha/20 rounded-2xl blur-md scale-110 group-hover:scale-125 transition-transform">
@@ -93,31 +93,97 @@
                     </div>
                     <div class="hidden sm:block">
                         <h1 class="font-playfair text-lg font-bold text-matcha-dark leading-tight">I KHEAW</h1>
-                        <p class="text-[9px] text-matcha/60 tracking-wider">PMatcha & Tea</p>
+                        <p class="text-[9px] text-matcha/60 tracking-wider">Matcha & Tea</p>
                     </div>
                 </a>
 
                 <!-- Desktop Menu -->
-                <ul class="hidden md:flex items-center gap-8">
-                    <li><a href="../views/index.html"
-                            class="text-gray-600 hover:text-matcha font-medium transition-colors">Home</a></li>
-                    <li><a href="../views/product.html"
-                            class="text-gray-600 hover:text-matcha font-medium transition-colors">Product</a></li>
-                    <li><a href="../views/about.html"
-                            class="text-gray-600 hover:text-matcha font-medium transition-colors">About
-                            us</a></li>
+                <ul class="hidden md:flex items-center gap-1">
+                    <li>
+                        <a href="/"
+                            class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+                            <i class="fas fa-home text-xs mr-1.5 opacity-50"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="product"
+                            class="px-4 py-2 text-gray-600 text-sm font-medium hover:text-matcha hover:bg-matcha/5 rounded-xl transition-all">
+                            <i class="fas fa-leaf text-xs mr-1.5 opacity-50"></i>
+                            Product
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about" class="px-4 py-2 text-matcha text-sm font-medium bg-matcha/10 rounded-xl">
+                            <i class="fas fa-heart text-xs mr-1.5 opacity-50"></i>
+                            About us
+                        </a>
+                    </li>
+                    <li class="ml-1">
+                        <a href="search"
+                            class="flex items-center justify-center w-9 h-9 text-gray-400 hover:text-matcha hover:bg-matcha/10 rounded-xl transition-all">
+                            <i class="fas fa-search text-sm"></i>
+                        </a>
+                    </li>
+                    <li class="ml-2">
+                        <a href="login"
+                            class="inline-flex items-center gap-2 bg-gradient-to-r from-matcha to-matcha-dark text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                            <i class="fas fa-sparkles text-xs"></i>
+                            Login
+                        </a>
+                        </a>
+                    </li>
                 </ul>
 
-                <!-- Right Actions -->
-                <div class="flex items-center gap-4">
-                    <a href="../views/search.html"
-                        class="w-10 h-10 rounded-full bg-matcha text-white flex items-center justify-center shadow-lg shadow-matcha/20 transition-all">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <a href="../views/login.html"
-                        class="hidden md:inline-flex px-6 py-2 bg-matcha text-white rounded-full font-medium shadow-lg shadow-matcha/20 hover:bg-matcha-dark hover:-translate-y-0.5 transition-all">
-                        Login
-                    </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn"
+                    class="md:hidden flex items-center justify-center w-9 h-9 text-gray-600 hover:bg-matcha/10 rounded-xl transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 pt-4 animate-fade-in">
+                <div class="bg-white rounded-2xl shadow-lg border border-matcha/10 p-3">
+                    <ul class="space-y-1">
+                        <li>
+                            <a href="../views/index.html"
+                                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-home text-matcha text-xs"></i>
+                                </div>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../views/product.html"
+                                class="flex items-center gap-3 py-3 px-4 text-gray-600 hover:bg-matcha/10 hover:text-matcha rounded-xl transition-colors">
+                                <div class="w-8 h-8 bg-matcha/10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-leaf text-matcha text-xs"></i>
+                                </div>
+                                Product
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../views/about.html"
+                                class="flex items-center gap-3 py-3 px-4 text-matcha bg-matcha/10 rounded-xl">
+                                <div class="w-8 h-8 bg-matcha/20 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-heart text-matcha text-xs"></i>
+                                </div>
+                                About us
+                            </a>
+                        </li>
+                        <li class="pt-2">
+                            <a href="../views/login.html"
+                                class="flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-matcha to-matcha-dark text-white rounded-xl font-medium">
+                                <i class="fas fa-sparkles text-sm"></i>
+                                Login
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -187,7 +253,7 @@
                                         class="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-matcha focus:ring-4 focus:ring-matcha/10 focus:outline-none transition-all appearance-none cursor-pointer">
                                         <option value="">All Grades</option>
                                         <option value="Normal">Normal</option>
-                                        <option value="Culinary">Culinary</option>
+                                        <option value="Ceremonial">Ceremonial</option>
                                     </select>
                                     <i
                                         class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
