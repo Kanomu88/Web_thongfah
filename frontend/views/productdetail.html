@@ -196,7 +196,7 @@
                         <!-- Image Section -->
                         <div class="relative group">
                             <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
-                                <img src="${convertGoogleDriveUrl(product.imageUrl) || '../assets/images/logo.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='../assets/images/logo.png'">
+                                <img src="${convertGoogleDriveUrl(product.imageUrl) || '../assets/images/logo.png'}"
                             </div>
                         </div>
 
@@ -229,6 +229,39 @@
                 container.innerHTML = '<div class="text-center py-20 text-red-500">Error loading product details.</div>';
             }
         };
+        function convertGoogleDriveUrl(url) {
+            if (!url) return null;
+
+            // Already a direct link, return as is
+            if (url.includes("googleusercontent.com")) return url;
+
+            let fileId = null;
+
+            // Case 1: https://drive.google.com/file/d/FILEID/view
+            if (url.includes("/file/d/")) {
+                const match = url.match(/\/file\/d\/(.*?)\//);
+                if (match) fileId = match[1];
+            }
+
+            // Case 2: https://drive.google.com/open?id=FILEID
+            else if (url.includes("open?id=")) {
+                const match = url.match(/open\?id=(.*)/);
+                if (match) fileId = match[1];
+            }
+
+            // Case 3: https://drive.google.com/uc?id=FILEID
+            else if (url.includes("uc?id=")) {
+                const match = url.match(/uc\?id=(.*)/);
+                if (match) fileId = match[1];
+            }
+
+            // Not a Drive URL → return original
+            if (!fileId) return url;
+
+            // Convert to direct image link (works with <img src>)
+            return `https://lh3.googleusercontent.com/d/${fileId}=s1200`;
+        }
+
     </script>
 
 </body>
