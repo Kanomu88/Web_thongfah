@@ -1,192 +1,322 @@
-# I KHEAW - Premium Matcha & Japanese Tea
+# I KHEAW - Matcha & Tea E-Commerce Platform
 
-เว็บไซต์แคตตาล็อกสินค้าชาเขียวและมัทฉะคุณภาพ สำหรับโปรเจค ITDS241
+โปรเจคเว็บแอปพลิเคชันสำหรับจำหน่ายผลิตภัณฑ์ชาเขียวและมัทฉะ พัฒนาด้วย MERN Stack (MongoDB, Express, React-like Vanilla JS, Node.js)
 
-## Overview
+## 📋 Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Default Accounts](#default-accounts)
 
-I KHEAW เป็นเว็บไซต์แสดงข้อมูลสินค้าชาเขียวและมัทฉะ ประกอบด้วยระบบ authentication สำหรับผู้ใช้งาน
+## ✨ Features
 
-## Tech Stack
+### Frontend (User)
+- 🏠 **Home Page**: แสดงข้อมูลร้านและสินค้าแนะนำ
+- 🛍️ **Product Catalog**: แสดงสินค้าทั้งหมดพร้อมรูปภาพและรายละเอียด
+- 🔍 **Search & Filter**: ค้นหาสินค้าตามชื่อและหมวดหมู่
+- 📄 **Product Detail**: แสดงรายละเอียดสินค้าแต่ละชิ้น
+- ℹ️ **About Us**: ข้อมูลเกี่ยวกับร้านและทีมงาน
+
+### Backend (Admin)
+- 👤 **User Management**: จัดการข้อมูลผู้ใช้ (CRUD)
+- 📦 **Product Management**: จัดการข้อมูลสินค้า (CRUD)
+- 🔐 **Authentication**: ระบบ Login/Logout พร้อม JWT
+- 🔒 **Authorization**: ป้องกันหน้า Admin (Admin Only)
+
+### Web Services
+- ✅ **RESTful API**: ออกแบบตาม REST principles
+- 🔍 **Search API**: รองรับการค้นหาแบบหลายเกณฑ์
+- 🔐 **JWT Authentication**: ระบบ Token-based authentication
+- 🌐 **CORS Enabled**: รองรับการเรียกใช้จาก Frontend
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- Node.js + Express.js (Static Server)
-- Tailwind CSS (CDN)
-- Font Awesome 6
+- HTML5, CSS3, JavaScript (Vanilla)
+- Tailwind CSS (via CDN)
+- Font Awesome Icons
 - Google Fonts (Playfair Display, Prompt)
 
 ### Backend
-- Node.js + Express.js
-- MongoDB + Mongoose
-- bcrypt.js (Password Hashing)
+- Node.js
+- Express.js
+- MongoDB (Atlas)
+- Mongoose ODM
+- JWT (JSON Web Tokens)
+- bcryptjs (Password Hashing)
 
-## โครงสร้างโปรเจค
+## 📁 Project Structure
 
 ```
 ITDS241-Project/
-├── frontend/
-│   ├── assets/images/      # รูปภาพ
-│   ├── css/                # Custom CSS
-│   ├── js/                 # JavaScript (auth.js)
-│   ├── views/              # HTML pages
-│   ├── index.html          # หน้าหลัก
-│   ├── server.js           # Express server
-│   └── package.json
 ├── backend/
-│   ├── config/             # Database config
-│   ├── controllers/        # API controllers
-│   ├── middleware/         # Error handling
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── server.js           # Express server
-│   └── package.json
-└── README.md
+│   ├── models/
+│   │   ├── User.js          # User schema
+│   │   └── Product.js       # Product schema
+│   ├── routes/
+│   │   ├── auth.js          # Authentication routes
+│   │   ├── products.js      # Product routes
+│   │   └── users.js         # User routes
+│   ├── middleware/
+│   │   └── auth.js          # JWT middleware
+│   ├── server.js            # Main server file
+│   ├── seed.js              # Database seeder
+│   ├── package.json
+│   └── .env                 # Environment variables
+│
+└── frontend/
+    ├── views/
+    │   ├── index.html       # Home page
+    │   ├── product.html     # Product catalog
+    │   ├── productdetail.html
+    │   ├── search.html      # Search page
+    │   ├── about.html       # About us
+    │   ├── login.html       # Login page
+    │   ├── productsadmin.html
+    │   └── usersadmin.html
+    ├── js/
+    │   └── api.js           # API service layer
+    └── assets/
+        └── images/          # Images and logos
 ```
 
-## การติดตั้ง
+## 🚀 Installation
 
 ### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB Atlas account (or local MongoDB)
+- Git
 
-- Node.js (v18+)
-- MongoDB (local หรือ Atlas)
-
-### 1. Clone โปรเจค
-
+### Step 1: Clone Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Kanomu88/Web_thongfah.git
 cd ITDS241-Project
 ```
 
-### 2. ติดตั้ง Backend
-
+### Step 2: Backend Setup
 ```bash
 cd backend
 npm install
 ```
 
-สร้างไฟล์ `.env`:
-
+### Step 3: Environment Variables
+สร้างไฟล์ `.env` ในโฟลเดอร์ `backend/`:
 ```env
 PORT=3001
-MONGODB_URI=mongodb://localhost:27017/ikheaw
+MONGODB_URI=mongodb+srv://your-connection-string
+JWT_SECRET=your-secret-key-change-this-in-production
 ```
 
-### 3. ติดตั้ง Frontend
-
+### Step 4: Seed Database (Optional)
 ```bash
-cd frontend
-npm install
+node seed.js
 ```
 
-## การรันโปรเจค
+### Step 5: Start Backend Server
+```bash
+npm run dev
+```
+Backend จะรันที่ `http://localhost:3001`
 
-### Development Mode
+### Step 6: Start Frontend
+เปิดไฟล์ `frontend/views/index.html` ด้วย:
+- Live Server extension ใน VS Code
+- หรือเปิดไฟล์โดยตรงใน browser
 
-**Terminal 1 - Backend:**
+## 📖 Usage
+
+### การรัน Backend
 ```bash
 cd backend
 npm run dev
 ```
-Server รันที่ `http://localhost:3001`
 
-**Terminal 2 - Frontend:**
-```bash
-cd frontend
-npm run dev
-```
-Server รันที่ `http://localhost:3000`
+### การรัน Frontend
+1. เปิด VS Code
+2. ติดตั้ง Live Server extension
+3. คลิกขวาที่ `frontend/views/index.html`
+4. เลือก "Open with Live Server"
 
-### Production Mode
+### การเข้าถึงระบบ
 
-```bash
-# Backend
-cd backend && npm start
+**Frontend (User):**
+- URL: `http://localhost:5500` (หรือพอร์ตที่ Live Server กำหนด)
 
-# Frontend
-cd frontend && npm start
-```
+**Backend API:**
+- URL: `http://localhost:3001/api`
+- Health Check: `http://localhost:3001/api/health`
 
-## API Endpoints
-
-### Health Check
-```
-GET /api/health
-```
+## 🔌 API Documentation
 
 ### Authentication
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | สมัครสมาชิก |
-| POST | `/api/auth/login` | เข้าสู่ระบบ |
-
-### Register Request
+#### POST /api/auth/login
+เข้าสู่ระบบ
 ```json
+Request:
 {
-  "username": "testuser",
-  "password": "123456",
-  "firstName": "Test",
-  "lastName": "User",
-  "email": "test@example.com"
+  "username": "admin",
+  "password": "admin123"
+}
+
+Response:
+{
+  "success": true,
+  "message": "เข้าสู่ระบบสำเร็จ",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "data": {
+    "id": "...",
+    "username": "admin",
+    "firstName": "Admin",
+    "lastName": "User",
+    "email": "admin@ikheaw.com",
+    "isAdmin": true
+  }
 }
 ```
 
-### Login Request
+#### POST /api/auth/register
+สมัครสมาชิก
 ```json
+Request:
 {
-  "username": "testuser",
-  "password": "123456"
+  "username": "newuser",
+  "password": "password123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@example.com"
 }
 ```
 
-## Frontend Routes
+### Products
 
-| Route | Description |
-|-------|-------------|
-| `/` | หน้าหลัก |
-| `/about` | เกี่ยวกับเรา |
-| `/login` | เข้าสู่ระบบ |
+#### GET /api/products
+ดึงข้อมูลสินค้าทั้งหมด (รองรับ query parameters)
+```
+Query Parameters:
+- name: ค้นหาตามชื่อ (partial match)
+- category: ค้นหาตามหมวดหมู่
+- minPrice: ราคาต่ำสุด
+- maxPrice: ราคาสูงสุด
 
-## Design System
-
-### Colors
-
-| Name | Hex | Usage |
-|------|-----|-------|
-| matcha | `#809671` | Primary |
-| matcha-dark | `#6a7d5e` | Hover/Accent |
-| matcha-light | `#a8b89d` | Light BG |
-| cream | `#f8f6f3` | Page BG |
-
-### Fonts
-
-- **Playfair Display** - หัวข้อ
-- **Prompt** - เนื้อหา (Thai)
-
-## Features
-
-- ระบบ Login/Register
-- Password hashing (bcrypt)
-- Responsive design
-- Scroll animations
-- Mobile-friendly navbar
-
-## Security
-
-- Password hashing ด้วย bcrypt (salt rounds: 10)
-- Input validation
-- Duplicate username/email check
-- Generic error messages (ไม่เปิดเผยว่า username หรือ password ผิด)
-
-## Scripts
-
-### Backend
-```bash
-npm start      # Production
-npm run dev    # Development (nodemon)
+Example: /api/products?category=Drinks&minPrice=50&maxPrice=100
 ```
 
-### Frontend
-```bash
-npm start      # Production
-npm run dev    # Development (nodemon)
+#### GET /api/products/:id
+ดึงข้อมูลสินค้าตาม ID
+
+#### POST /api/products
+เพิ่มสินค้าใหม่ (Admin only)
+```json
+Headers:
+{
+  "Authorization": "Bearer <token>"
+}
+
+Request:
+{
+  "name": "Matcha Latte",
+  "category": "Drinks",
+  "price": 85,
+  "stock": 50,
+  "description": "...",
+  "imageUrl": "https://..."
+}
 ```
+
+#### PUT /api/products/:id
+แก้ไขสินค้า (Admin only)
+
+#### DELETE /api/products/:id
+ลบสินค้า (Admin only)
+
+### Users (Admin Only)
+
+#### GET /api/users
+ดึงข้อมูลผู้ใช้ทั้งหมด
+```
+Query Parameters:
+- username: ค้นหาตาม username
+- email: ค้นหาตาม email
+- isAdmin: กรองตาม role (true/false)
+```
+
+#### POST /api/users
+เพิ่มผู้ใช้ใหม่
+
+#### PUT /api/users/:id
+แก้ไขข้อมูลผู้ใช้
+
+#### DELETE /api/users/:id
+ลบผู้ใช้
+
+## 👤 Default Accounts
+
+### Admin Account
+- **Username**: `admin`
+- **Password**: `admin123`
+- **Email**: `admin@ikheaw.com`
+
+### User Account
+- **Username**: `user`
+- **Password**: `user123`
+- **Email**: `user@ikheaw.com`
+
+## 🔒 Security Features
+
+- ✅ Password hashing with bcryptjs
+- ✅ JWT token authentication
+- ✅ Protected admin routes
+- ✅ CORS enabled
+- ✅ Input validation
+- ✅ Error handling middleware
+
+## 📝 Notes
+
+### การใช้งาน JWT Token
+Token จะถูกเก็บใน `localStorage` และส่งใน Authorization header:
+```javascript
+Authorization: Bearer <token>
+```
+
+### CORS Configuration
+Backend อนุญาตให้เข้าถึงจากทุก origin (`*`) เพื่อความสะดวกในการพัฒนา
+ในการใช้งานจริง ควรกำหนด origin ที่เฉพาะเจาะจง
+
+## 🐛 Troubleshooting
+
+### ปัญหา: Port 3001 ถูกใช้งานอยู่
+```bash
+# Windows
+netstat -ano | findstr :3001
+taskkill /F /PID <PID>
+
+# หรือเปลี่ยน PORT ใน .env
+PORT=3002
+```
+
+### ปัญหา: MongoDB Connection Error
+- ตรวจสอบ `MONGODB_URI` ใน `.env`
+- ตรวจสอบ Network Access ใน MongoDB Atlas
+- ตรวจสอบ Database User credentials
+
+### ปัญหา: CORS Error
+- ตรวจสอบว่า Backend รันอยู่ที่ `http://localhost:3001`
+- ตรวจสอบ `API_BASE_URL` ใน `frontend/js/api.js`
+
+## 📄 License
+
+This project is created for educational purposes (ITDS241 Course Project).
+
+## 👥 Contributors
+
+- **Developer**: [Your Name]
+- **Course**: ITDS241
+- **Institution**: [Your University]
+
+---
+
+**Last Updated**: November 21, 2025

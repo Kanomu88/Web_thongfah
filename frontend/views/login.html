@@ -141,7 +141,8 @@
 
       <div class="w-full max-w-md">
         <!-- Back button -->
-        <a href="../views/index.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-matcha mb-8 transition-colors group">
+        <a href="../views/index.html"
+          class="inline-flex items-center gap-2 text-gray-400 hover:text-matcha mb-8 transition-colors group">
           <i class="fas fa-arrow-left text-sm group-hover:-translate-x-1 transition-transform"></i>
           <span class="text-sm">กลับหน้าหลัก</span>
         </a>
@@ -238,7 +239,7 @@
     </div>
   </div>
 
-  <script src="/js/auth.js"></script>
+  <script src="../js/api.js"></script>
   <script>
     // toggle password
     document.getElementById('toggle-password').addEventListener('click', function () {
@@ -276,7 +277,11 @@
           submitBtn.classList.add('bg-green-500');
 
           setTimeout(() => {
-            window.location.href = '/';
+            if (result.data.isAdmin) {
+              window.location.href = '../views/productsadmin.html';
+            } else {
+              window.location.href = '../views/index.html';
+            }
           }, 1000);
         } else {
           errorDiv.querySelector('span').textContent = result.message;
@@ -285,6 +290,7 @@
           submitBtn.innerHTML = '<span>เข้าสู่ระบบ</span><i class="fas fa-arrow-right"></i>';
         }
       } catch (error) {
+        console.error(error);
         errorDiv.querySelector('span').textContent = 'เกิดข้อผิดพลาด กรุณาลองใหม่';
         errorDiv.classList.remove('hidden');
         submitBtn.disabled = false;

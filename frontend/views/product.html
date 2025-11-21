@@ -177,27 +177,29 @@
         </div>
     </footer>
 
-    <!-- Import Data -->
-    <script src="../assets/js/data.js"></script>
+    <!-- Import API -->
+    <script src="../js/api.js"></script>
 
     <script>
-        window.onload = function () {
+        window.onload = async function () {
             const grid = document.getElementById('productGrid');
 
-            // Simulate loading
-            setTimeout(() => {
-                if (!products || products.length === 0) {
+            try {
+                const result = await productService.getAll();
+
+                if (!result.success || !result.data || result.data.length === 0) {
                     grid.innerHTML = '<div class="col-span-full text-center text-gray-500">No products available.</div>';
                     return;
                 }
 
+                const products = result.data;
                 let html = '';
                 products.forEach(p => {
                     html += `
-                        <a href="productdetail.html?id=${p.id}" class="block group">
+                        <a href="productdetail.html?id=${p._id}" class="block group">
                             <div class="bg-white rounded-2xl shadow-sm border border-matcha/10 overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full flex flex-col">
                                 <div class="h-64 bg-gray-100 relative overflow-hidden">
-                                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                    <img src="${p.imageUrl || '../assets/images/logo.png'}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.src='../assets/images/logo.png'">
                                     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                                     <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-matcha shadow-sm">
                                         ${p.category}
@@ -213,8 +215,7 @@
                                         <h4 class="font-playfair text-lg font-bold text-gray-800 group-hover:text-matcha transition-colors line-clamp-2">${p.name}</h4>
                                     </div>
                                     <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                                        <span class="bg-matcha/10 text-matcha px-2 py-1 rounded-md">${p.grade}</span>
-                                        <span>${p.origin}</span>
+                                        <span class="bg-matcha/10 text-matcha px-2 py-1 rounded-md">In Stock</span>
                                     </div>
                                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-gray-100">
                                         <span class="text-xl font-bold text-matcha-dark">฿${p.price}</span>
@@ -226,9 +227,13 @@
                     `;
                 });
                 grid.innerHTML = html;
-            }, 500);
+            } catch (error) {
+                console.error(error);
+                grid.innerHTML = '<div class="col-span-full text-center text-red-500">Error loading products.</div>';
+            }
         };
     </script>
+
 </body>
 
 </html>

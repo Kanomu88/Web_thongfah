@@ -268,7 +268,7 @@
                                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-matcha focus:outline-none transition-all">
                             </div>
                         </div>
-                        
+
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-gray-700">Profile Image URL</label>
                             <div class="flex gap-4">
@@ -318,37 +318,45 @@
         </div>
     </div>
 
+    <script src="../js/api.js"></script>
     <script>
-        // Data
-        let users = [
-            { id: 1, name: 'Jirawat Pratuangtup', email: 'jirawat.pru@student.mahidol.edu', image: '' },
-            { id: 2, name: 'Nitis Charoendee', email: 'nitis.cha@student.mahidol.edu', image: '' },
-            { id: 3, name: 'Pavida Khramwong', email: 'pavida.khr@student.mahidol.edu', image: '' },
-            { id: 4, name: 'Sirawich Srisukmungmee', email: 'sirawich.srs@student.mahidol.edu', image: '' },
-        ];
+        // Check Auth
+        const currentUser = auth.checkAuth();
+        if (!currentUser.isAdmin) {
+            alert('Access Denied');
+            window.location.href = '/views/index.html';
+        }
 
+        let users = [];
         let deleteId = null;
 
         // Render Users
-        function renderUsers(filter = '') {
+        async function fetchAndRenderUsers(filter = '') {
+            const result = await userService.getAll({ username: filter });
+            if (result.success) {
+                users = result.data;
+                renderUsers(users);
+            }
+        }
+
+        function renderUsers(items) {
             const tbody = document.getElementById('user-list');
             tbody.innerHTML = '';
+            document.getElementById('total-users').innerText = items.length;
 
-            const filtered = users.filter(u => u.name.toLowerCase().includes(filter.toLowerCase()) || u.email.toLowerCase().includes(filter.toLowerCase()));
-            document.getElementById('total-users').innerText = filtered.length;
-
-            filtered.forEach(u => {
+            items.forEach(u => {
                 const tr = document.createElement('tr');
                 tr.className = 'border-b border-gray-50 hover:bg-gray-50/50 transition-colors';
                 tr.innerHTML = `
           <td class="p-6">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                <img src="${u.image}" alt="${u.name}" class="w-full h-full object-cover">
+                <img src="${u.image || `https://ui-avatars.com/api/?name=${u.username}&background=random`}" alt="${u.username}" class="w-full h-full object-cover">
               </div>
               <div>
-                <h4 class="font-semibold text-gray-800">${u.name}</h4>
-                <p class="text-xs text-gray-400">ID: #00${u.id}</p>
+                <h4 class="font-semibold text-gray-800">${u.username}</h4>
+                <p class="text-xs text-gray-400">ID: ${u._id.substring(u._id.length - 6)}</p>
+                ${u.isAdmin ? '<span class="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full">Admin</span>' : ''}
               </div>
             </div>
           </td>
@@ -357,10 +365,10 @@
           </td>
           <td class="p-6 text-right">
             <div class="flex justify-end gap-2">
-              <button onclick="openModal('edit', ${u.id})" class="w-9 h-9 rounded-lg bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex items-center justify-center">
+              <button onclick="openModal('edit', '${u._id}')" class="w-9 h-9 rounded-lg bg-blue-50 text-blue-500 hover:bg-blue-100 transition-all flex items-center justify-center">
                 <i class="fas fa-pen text-xs"></i>
               </button>
-              <button onclick="openDeleteModal(${u.id})" class="w-9 h-9 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-all flex items-center justify-center">
+              <button onclick="openDeleteModal('${u._id}')" class="w-9 h-9 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-all flex items-center justify-center">
                 <i class="fas fa-trash text-xs"></i>
               </button>
             </div>
@@ -368,18 +376,6 @@
         `;
                 tbody.appendChild(tr);
             });
-        }
-
-        function getStatusColor(status) {
-            if (status === 'Active') return 'bg-green-100 text-green-600';
-            if (status === 'Inactive') return 'bg-gray-100 text-gray-600';
-            return 'bg-red-100 text-red-600';
-        }
-
-        function getRoleColor(role) {
-            if (role === 'Admin') return 'bg-purple-100 text-purple-600';
-            if (role === 'Editor') return 'bg-blue-100 text-blue-600';
-            return 'bg-gray-100 text-gray-600';
         }
 
         // Modal Functions
@@ -392,13 +388,12 @@
 
             if (mode === 'edit') {
                 title.innerText = 'Edit User';
-                const user = users.find(u => u.id === id);
-                document.getElementById('user-id').value = user.id;
-                document.getElementById('user-name').value = user.name;
+                const user = users.find(u => u._id === id);
+                document.getElementById('user-id').value = user._id;
+                document.getElementById('user-name').value = user.username;
                 document.getElementById('user-email').value = user.email;
-                document.getElementById('user-role').value = user.role;
-                document.getElementById('user-status').value = user.status;
-                document.getElementById('user-image').value = user.image;
+                document.getElementById('user-image').value = user.image || '';
+                // Note: Password editing is not implemented in this simple view for security/complexity reasons
             } else {
                 title.innerText = 'Add New User';
                 form.reset();
@@ -420,46 +415,62 @@
             document.getElementById('delete-modal').classList.add('hidden');
         }
 
-        function confirmDelete() {
+        async function confirmDelete() {
             if (deleteId) {
-                users = users.filter(u => u.id !== deleteId);
-                renderUsers();
-                closeDeleteModal();
+                const result = await userService.delete(deleteId);
+                if (result.success) {
+                    fetchAndRenderUsers();
+                    closeDeleteModal();
+                } else {
+                    alert('Error deleting user: ' + result.message);
+                }
             }
         }
 
         // Form Submit
-        document.getElementById('user-form').addEventListener('submit', (e) => {
+        document.getElementById('user-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('user-id').value;
-            const newUser = {
-                id: id ? parseInt(id) : users.length + 1,
-                name: document.getElementById('user-name').value,
+            const userData = {
+                username: document.getElementById('user-name').value,
                 email: document.getElementById('user-email').value,
-                role: document.getElementById('user-role').value,
-                status: document.getElementById('user-status').value,
-                image: document.getElementById('user-image').value || `https://ui-avatars.com/api/?name=${document.getElementById('user-name').value}&background=random`
+                image: document.getElementById('user-image').value,
+                firstName: 'Admin', // Default for simplicity
+                lastName: 'User'    // Default for simplicity
             };
 
-            if (id) {
-                const index = users.findIndex(u => u.id == id);
-                users[index] = newUser;
-            } else {
-                users.push(newUser);
+            // For new users, set a default password
+            if (!id) {
+                userData.password = '123456';
+                userData.firstName = 'New';
+                userData.lastName = 'User';
             }
 
-            renderUsers();
-            closeModal();
+            let result;
+            if (id) {
+                result = await userService.update(id, userData);
+            } else {
+                result = await userService.create(userData);
+            }
+
+            if (result.success) {
+                fetchAndRenderUsers();
+                closeModal();
+            } else {
+                alert('Error saving user: ' + result.message);
+            }
         });
 
         // Search
         document.getElementById('search-input').addEventListener('input', (e) => {
-            renderUsers(e.target.value);
+            fetchAndRenderUsers(e.target.value);
         });
 
         // Initial Render
-        renderUsers();
+        fetchAndRenderUsers();
     </script>
+
 </body>
 
 </html>
+```

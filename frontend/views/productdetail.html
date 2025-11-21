@@ -159,19 +159,24 @@
         </div>
     </footer>
 
-    <!-- Import Data -->
-    <script src="../assets/js/data.js"></script>
+    <!-- Import API -->
+    <script src="../js/api.js"></script>
 
     <script>
-        window.onload = function () {
+        window.onload = async function () {
             const urlParams = new URLSearchParams(window.location.search);
-            const productId = parseInt(urlParams.get('id'));
+            const productId = urlParams.get('id');
             const container = document.getElementById('productContent');
 
-            setTimeout(() => {
-                const product = products.find(p => p.id === productId);
+            if (!productId) {
+                window.location.href = 'product.html';
+                return;
+            }
 
-                if (!product) {
+            try {
+                const result = await productService.getById(productId);
+
+                if (!result.success || !result.data) {
                     container.innerHTML = `
                         <div class="text-center py-20">
                             <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -185,16 +190,14 @@
                     return;
                 }
 
+                const product = result.data;
+
                 container.innerHTML = `
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <!-- Image Section -->
                         <div class="relative group">
                             <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
-                                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            </div>
-                            <!-- Citation -->
-                            <div class="mt-4 text-xs text-gray-400 italic text-center">
-                                <i class="fas fa-camera mr-1"></i> ${product.citation}
+                                <img src="${product.imageUrl || '../assets/images/logo.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='../assets/images/logo.png'">
                             </div>
                         </div>
 
@@ -206,9 +209,7 @@
                                 </span>
                                 <h1 class="font-playfair text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">${product.name}</h1>
                                 <div class="flex items-center gap-4 text-sm text-gray-500 mb-6">
-                                    <span class="flex items-center gap-1"><i class="fas fa-star text-orange-300"></i> Grade: ${product.grade}</span>
-                                    <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                                    <span class="flex items-center gap-1"><i class="fas fa-globe-asia text-matcha/50"></i> ${product.origin}</span>
+                                    <span class="flex items-center gap-1"><i class="fas fa-box text-orange-300"></i> Stock: ${product.stock}</span>
                                 </div>
                                 <div class="text-3xl font-bold text-matcha-dark mb-8">฿${product.price}</div>
                             </div>
@@ -216,7 +217,7 @@
                             <div class="prose prose-stone mb-8">
                                 <h3 class="font-playfair text-xl font-bold text-gray-800 mb-3">Description</h3>
                                 <p class="text-gray-600 leading-relaxed">
-                                    ${product.description}
+                                    ${product.description || 'No description available.'}
                                 </p>
                             </div>
 
@@ -231,9 +232,13 @@
                         </div>
                     </div>
                 `;
-            }, 300);
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = '<div class="text-center py-20 text-red-500">Error loading product details.</div>';
+            }
         };
     </script>
+
 </body>
 
 </html>

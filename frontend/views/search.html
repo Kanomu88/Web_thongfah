@@ -223,8 +223,8 @@
         </div>
     </main>
 
-    <!-- Import Data -->
-    <script src="../assets/js/data.js"></script>
+    <!-- Import API -->
+    <script src="../js/api.js"></script>
 
     <script>
         // Check for URL parameters to pre-fill filters
@@ -241,25 +241,29 @@
                         break;
                     }
                 }
-                searchProducts();
             }
+            searchProducts();
         };
 
-        function searchProducts() {
+        async function searchProducts() {
             const resultsArea = document.getElementById('resultsArea');
             resultsArea.innerHTML = '<div class="text-center py-20"><i class="fas fa-circle-notch fa-spin text-4xl text-matcha mb-4"></i><p class="text-gray-500">Searching...</p></div>';
 
-            // Simulate API delay for better UX feel
-            setTimeout(() => {
+            try {
+                const result = await productService.getAll();
+                if (!result.success || !result.data) {
+                    resultsArea.innerHTML = '<div class="text-center py-20 text-red-500">Error fetching products.</div>';
+                    return;
+                }
+
+                const products = result.data;
                 const nameVal = document.getElementById('nameInput').value.toLowerCase();
                 const categoryVal = document.getElementById('categoryInput').value.toLowerCase();
-                const gradeVal = document.getElementById('gradeInput').value.toLowerCase();
 
                 let filtered = products;
 
                 if (nameVal) filtered = filtered.filter(p => p.name.toLowerCase().includes(nameVal));
                 if (categoryVal) filtered = filtered.filter(p => p.category.toLowerCase().includes(categoryVal));
-                if (gradeVal) filtered = filtered.filter(p => p.grade.toLowerCase().includes(gradeVal));
 
                 if (filtered.length === 0) {
                     resultsArea.innerHTML = `
@@ -275,10 +279,10 @@
                     let html = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">';
                     filtered.forEach(p => {
                         html += `
-                            <a href="productdetail.html?id=${p.id}" class="block">
+                            <a href="productdetail.html?id=${p._id}" class="block">
                                 <div class="bg-white rounded-2xl shadow-sm border border-matcha/10 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full flex flex-col">
                                     <div class="h-48 bg-gray-100 relative overflow-hidden">
-                                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <img src="${p.imageUrl || '../assets/images/logo.png'}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='../assets/images/logo.png'">
                                         <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-matcha shadow-sm">
                                             ${p.category}
                                         </div>
@@ -286,9 +290,7 @@
                                     <div class="p-6 flex-1 flex flex-col">
                                         <h4 class="font-playfair text-lg font-bold text-gray-800 mb-2 group-hover:text-matcha transition-colors">${p.name}</h4>
                                         <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                                            <span class="flex items-center gap-1"><i class="fas fa-star text-orange-300"></i> ${p.grade}</span>
-                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                                            <span>${p.origin}</span>
+                                            <span class="flex items-center gap-1"><i class="fas fa-box text-orange-300"></i> Stock: ${p.stock}</span>
                                         </div>
                                         <div class="mt-auto flex justify-between items-center">
                                             <span class="text-xl font-bold text-matcha-dark">฿${p.price}</span>
@@ -304,9 +306,13 @@
                     html += '</div>';
                     resultsArea.innerHTML = html;
                 }
-            }, 300);
+            } catch (error) {
+                console.error(error);
+                resultsArea.innerHTML = '<div class="text-center py-20 text-red-500">Error searching products.</div>';
+            }
         }
     </script>
+
 </body>
 
 </html>
