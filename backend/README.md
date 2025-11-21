@@ -16,19 +16,19 @@ Backend API สำหรับเว็บไซต์ I KHEAW - Premium Matcha 
 
 ```
 backend/
-├── config/
-│   └── database.js          # การเชื่อมต่อ MongoDB
-├── controllers/
-│   └── auth.controller.js   # Controller สำหรับ login/register
-├── middleware/
-│   └── error.middleware.js  # จัดการ error
-├── models/
-│   └── model.user.js        # User Schema
-├── routes/
-│   └── auth.routes.js       # Routes สำหรับ authentication
-├── server.js                # Entry point
-├── package.json
-└── .env                     # Environment variables
+  ├── models/
+  │   ├── User.js          # User schema
+  │   └── Product.js       # Product schema
+  ├── routes/
+  │   ├── auth.js          # Authentication routes
+  │   ├── products.js      # Product routes
+  │   └── users.js         # User routes
+  ├── middleware/
+  │   └── auth.js          # JWT middleware
+  ├── server.js            # Main server file
+  ├── seed.js              # Database seeder
+  ├── package.json
+  └── .env                 # Environment variables
 ```
 
 ## การติดตั้ง
@@ -88,58 +88,6 @@ GET /api/health
 {
   "status": "OK",
   "message": "Server is running"
-}
-```
-
----
-
-### Authentication
-
-#### Register - สมัครสมาชิก
-
-```
-POST /api/auth/register
-```
-
-**Request Body:**
-```json
-{
-  "username": "testuser",
-  "password": "123456",
-  "firstName": "Test",
-  "lastName": "User",
-  "email": "test@example.com"
-}
-```
-
-**Success Response (201):**
-```json
-{
-  "success": true,
-  "message": "สมัครสมาชิกสำเร็จ",
-  "data": {
-    "id": "6571234567890abcdef12345",
-    "username": "testuser",
-    "firstName": "Test",
-    "lastName": "User",
-    "email": "test@example.com"
-  }
-}
-```
-
-**Error Response (400) - Username/Email ซ้ำ:**
-```json
-{
-  "success": false,
-  "message": "username นี้ถูกใช้งานแล้ว"
-}
-```
-
-**Error Response (400) - Validation Error:**
-```json
-{
-  "success": false,
-  "message": "Username is required, Password is required"
 }
 ```
 
@@ -231,23 +179,8 @@ API จะ return error ในรูปแบบ:
 
 ## ทดสอบด้วย Postman
 
-### 1. Register
 
-- **Method:** POST
-- **URL:** `http://localhost:3001/api/auth/register`
-- **Headers:** `Content-Type: application/json`
-- **Body (raw JSON):**
-```json
-{
-  "username": "admin",
-  "password": "password123",
-  "firstName": "Admin",
-  "lastName": "User",
-  "email": "admin@ikheaw.com"
-}
-```
-
-### 2. Login
+### ๅ. Login
 
 - **Method:** POST
 - **URL:** `http://localhost:3001/api/auth/login`

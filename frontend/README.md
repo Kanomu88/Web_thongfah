@@ -2,33 +2,26 @@
 
 Frontend สำหรับเว็บไซต์ I KHEAW - Premium Matcha & Japanese Tea
 
-## Tech Stack
-
-- **Runtime:** Node.js
-- **Framework:** Express.js (Static Server)
-- **CSS Framework:** Tailwind CSS (CDN)
-- **Icons:** Font Awesome 6
-- **Fonts:** Google Fonts (Playfair Display, Prompt)
-
 ## โครงสร้างโปรเจค
 
 ```
 frontend/
-├── assets/
-│   └── images/           # รูปภาพทั้งหมด
-├── css/
-│   └── style.css         # Custom CSS
-├── js/
-│   └── auth.js           # Authentication API functions
-├── views/
-│   ├── about.html        # หน้าเกี่ยวกับเรา
-│   ├── login.html        # หน้าเข้าสู่ระบบ
-│   ├── register.html     # หน้าสมัครสมาชิก
-│   └── not-found.html    # หน้า 404
-├── index.html            # หน้าหลัก
-├── server.js             # Express static server
-├── package.json
-└── README.md
+    ├── views/
+    │   ├── about.html         # About us
+    │   ├── login.html         # Login page
+    │   ├── not-found.html     # Notfound page
+    │   ├── product.html       # Product Catalog page
+    │   ├── productsadmin.html # Product Catalog edit for admin
+    │   ├── productdetail.html # Detail Per product
+    │   ├── search.html        # Search page
+    │   └── usersadmin.html    # User edit for admin
+    ├── index.html             # Homepage
+    ├── js/
+    │   └── api.js             # API service layer
+    │   └── auth.js            # Admin token service layer
+    ├── assets/
+    │   └── images/            # Images and logos
+    └── server.js              # JS for routing  
 ```
 
 ## การติดตั้ง
@@ -58,11 +51,12 @@ Server จะรันที่ `http://localhost:3000`
 
 | Route | Description |
 |-------|-------------|
-| `/` | หน้าหลัก (Homepage) |
-| `/about` | หน้าเกี่ยวกับเรา |
-| `/login` | หน้าเข้าสู่ระบบ |
-| `/register` | หน้าสมัครสมาชิก |
-| `/*` | 404 Not Found |
+| `/`        | หน้าหลัก (Homepage) |
+| `/about`   | หน้าเกี่ยวกับเรา |
+| `/login`   | หน้าเข้าสู่ระบบ |
+| `/product` | หน้าเเคตาล็อคสินค้า |
+| `/*`       | 404 Not Found |
+| `/search`  | หน้าคนหาสินค้า |
 
 ## Design System
 
@@ -108,15 +102,6 @@ tailwind.config = {
 ```javascript
 // Login
 auth.login(username, password)
-
-// Register
-auth.register({
-  username,
-  password,
-  firstName,
-  lastName,
-  email
-})
 
 // Logout
 auth.logout()

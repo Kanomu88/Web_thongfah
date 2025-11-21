@@ -32,21 +32,6 @@
 - 🔐 **JWT Authentication**: ระบบ Token-based authentication
 - 🌐 **CORS Enabled**: รองรับการเรียกใช้จาก Frontend
 
-## 🛠️ Tech Stack
-
-### Frontend
-- HTML5, CSS3, JavaScript (Vanilla)
-- Tailwind CSS (via CDN)
-- Font Awesome Icons
-- Google Fonts (Playfair Display, Prompt)
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB (Atlas)
-- Mongoose ODM
-- JWT (JSON Web Tokens)
-- bcryptjs (Password Hashing)
 
 ## 📁 Project Structure
 
@@ -69,18 +54,21 @@ ITDS241-Project/
 │
 └── frontend/
     ├── views/
-    │   ├── index.html       # Home page
-    │   ├── product.html     # Product catalog
-    │   ├── productdetail.html
-    │   ├── search.html      # Search page
-    │   ├── about.html       # About us
-    │   ├── login.html       # Login page
-    │   ├── productsadmin.html
-    │   └── usersadmin.html
+    │   ├── about.html         # About us
+    │   ├── login.html         # Login page
+    │   ├── not-found.html     # Notfound page
+    │   ├── product.html       # Product Catalog page
+    │   ├── productsadmin.html # Product Catalog edit for admin
+    │   ├── productdetail.html # Detail Per product
+    │   ├── search.html        # Search page
+    │   └── usersadmin.html    # User edit for admin
+    ├── index.html             # Homepage
     ├── js/
-    │   └── api.js           # API service layer
-    └── assets/
-        └── images/          # Images and logos
+    │   └── api.js             # API service layer
+    │   └── auth.js            # Admin token service layer
+    ├── assets/
+    │   └── images/            # Images and logos
+    └── server.js              # JS for routing        
 ```
 
 ## 🚀 Installation
@@ -121,29 +109,21 @@ npm run dev
 ```
 Backend จะรันที่ `http://localhost:3001`
 
-### Step 6: Start Frontend
-เปิดไฟล์ `frontend/views/index.html` ด้วย:
-- Live Server extension ใน VS Code
-- หรือเปิดไฟล์โดยตรงใน browser
 
-## 📖 Usage
-
-### การรัน Backend
+### Step1 การรัน Frontend
 ```bash
-cd backend
+cd frontend
+npm install
+```
+### Step 2: Start frontend Server
+```bash
 npm run dev
 ```
-
-### การรัน Frontend
-1. เปิด VS Code
-2. ติดตั้ง Live Server extension
-3. คลิกขวาที่ `frontend/views/index.html`
-4. เลือก "Open with Live Server"
 
 ### การเข้าถึงระบบ
 
 **Frontend (User):**
-- URL: `http://localhost:5500` (หรือพอร์ตที่ Live Server กำหนด)
+- URL: `http://localhost:3000` (หรือพอร์ตที่กำหนดใน server.js)
 
 **Backend API:**
 - URL: `http://localhost:3001/api`
@@ -199,11 +179,7 @@ Request:
 Query Parameters:
 - name: ค้นหาตามชื่อ (partial match)
 - category: ค้นหาตามหมวดหมู่
-- minPrice: ราคาต่ำสุด
-- maxPrice: ราคาสูงสุด
 
-Example: /api/products?category=Drinks&minPrice=50&maxPrice=100
-```
 
 #### GET /api/products/:id
 ดึงข้อมูลสินค้าตาม ID
